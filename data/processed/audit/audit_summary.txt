@@ -1,0 +1,11 @@
+AUDIT CSVS: purpose
+==================================================
+Each audit CSV contains, per company:
+  - obs_date and label used during training/testing
+  - model's calibrated risk score and predicted tier
+  - the company's CURRENT CRO status (real-world truth)
+  - whether the modelled outcome matches today's reality
+
+Use this when an examiner asks for evidence that:
+  - the model trained on companies that actually did dissolve, OR
+  - flagged companies have, in fact, dissolved since obs_date.
