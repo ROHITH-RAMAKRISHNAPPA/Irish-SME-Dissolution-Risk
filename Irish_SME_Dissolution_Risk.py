@@ -1708,42 +1708,6 @@ with st.sidebar:
 ap_str = f"{to_float(meta.get('avg_precision', '')):.4f}" if meta.get("avg_precision") else "n/a"
 auc_str = f"{to_float(meta.get('auc_roc', '')):.4f}" if meta.get("auc_roc") else "n/a"
 
-# Data vintage. A reviewer's first question about any scored population is what
-# date it speaks to, and the answer is not today: every company was scored at its
-# observation date, and the register cross-check is only as fresh as the file it
-# was built from. File modification times are used rather than a hardcoded date
-# so the strip cannot drift out of step with the data it describes.
-OBSERVATION_DATE = "31 December 2024"
-
-
-def _file_date(path) -> str:
-    try:
-        return datetime.fromtimestamp(pathlib.Path(path).stat().st_mtime).strftime("%d %b %Y")
-    except (OSError, ValueError):
-        return "unknown"
-
-
-# The pulse reflects the same nine artefact checks the sidebar runs. It is green
-# only when every one passes, so a degraded load is visible from the header
-# rather than only to someone who opens the sidebar.
-_health = [len(prosp) > 0, len(priority) > 0, bool(meta), len(comp_df) > 0,
-           len(narratives_dict) > 0, len(feature_cols) > 0,
-           mean_abs_shap is not None, model is not None, explainer is not None]
-_ok, _tot = sum(_health), len(_health)
-_dot = "#1A7340" if _ok == _tot else "#E07B00"
-_dot_txt = ("All artefacts loaded" if _ok == _tot
-            else f"{_tot - _ok} of {_tot} artefacts unavailable, see sidebar")
-
-_vintage = [
-    f'<span class="pulse" style="background:{_dot};box-shadow:0 0 7px {_dot};"></span>{_dot_txt}',
-    f"Scored at the {OBSERVATION_DATE} observation date",
-    f"Register cross-check {_file_date(OUTPUTS / 'nlp' / 'cohort_validation.csv')}",
-    f"Scores built {_file_date(DATA_PROC / 'prospective_final.csv')}",
-    f"{winner_name or 'Model'} AP {ap_str} / AUC {auc_str}",
-    f"{len(prosp):,} companies, {len(feature_cols)} filing-behaviour features",
-]
-_vintage_html = ' <span style="opacity:.4;">|</span> '.join(_vintage)
-
 st.markdown(f"""
 <div class="{_ENTER}"><div style="background: linear-gradient(135deg, {UI_DARK} 0%, {UI_BG} 100%);
             padding: 20px 26px; border-radius: 8px;
@@ -1751,29 +1715,52 @@ st.markdown(f"""
   <div style="display:flex; justify-content:space-between; align-items:center;">
     <div>
       <h1 style="margin:0; font-size:1.55rem;">Irish SME Dissolution Risk Dashboard</h1>
-      <div style="margin-top:7px; color:{UI_TEXT_DIM}; font-size:0.78rem;
-                  letter-spacing:0.2px;">{_vintage_html}</div>
     </div>
   </div>
 </div></div>
 """, unsafe_allow_html=True)
-st.caption("Scores describe each company as at its observation date, not as at today. "
-           "A company that has filed, been struck off or changed hands since will not "
-           "reflect that here. No financial statement content is used.")
 
 
 # =============================================================================
 # TABS
 # =============================================================================
-tab1, tab7, tab2, tab3, tab4, tab5, tab6 = st.tabs([
-    "Executive Overview",
-    "Client Portfolio",
-    "Risk Tiers",
-    "Company Lookup",
-    "Model Performance",
-    "Risk Factors",
-    "Model Validation",
-])
+# Two audiences, one dashboard. An engagement lead wants a client list and a
+# risk tier; a methodology reviewer wants the permutation null and the
+# calibration. Showing both the same seven tabs serves neither well, so the
+# audience picks and the tab set follows. Every tab exists in both modes; the
+# mode decides which are on screen.
+_mode_l, _mode_r = st.columns([2, 5])
+with _mode_l:
+    ui_mode = st.radio(
+        "View", ["Engagement", "Methodology"], index=0, horizontal=True,
+        key="ui_mode", label_visibility="collapsed",
+        help="Engagement: your clients, their tier, and the evidence for one "
+             "company. Methodology: how the model was selected, what drives it, "
+             "and how the ranking was validated.")
+with _mode_r:
+    st.caption(
+        "Which of your clients are at risk, why, and what the file says."
+        if ui_mode == "Engagement" else
+        "Model selection, feature attribution, and validation against the "
+        "register.")
+
+IS_ENGAGEMENT = ui_mode == "Engagement"
+
+if IS_ENGAGEMENT:
+    tab1, tab7, tab3 = st.tabs([
+        "Executive Overview",
+        "Client Portfolio",
+        "Company Lookup",
+    ])
+else:
+    tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
+        "Executive Overview",
+        "Risk Tiers",
+        "Company Lookup",
+        "Model Performance",
+        "Risk Factors",
+        "Model Validation",
+    ])
 
 
 # ----------------------------------------------------------------------------
@@ -1805,13 +1792,27 @@ with tab1:
         # shape: four tiers spanning three orders of magnitude. So the bars carry
         # the share and nothing else.
         tdf["Label"] = tdf["Share"].astype(str) + "%"
-        fig = px.bar(tdf, x="Count", y="Tier", orientation="h",
-                     color="Tier", color_discrete_map=TIER_COLORS,
-                     text="Label", log_x=True)
-        fig.update_traces(textposition="outside", cliponaxis=False)
+        # One trace with a colour list, not px.bar(color=...). Colouring by a
+        # column makes Plotly build one trace per colour, and four traces across
+        # four categories each get their own offset slot inside the category
+        # band, which is what pushed every bar off its own label.
+        fig = go.Figure(go.Bar(
+            y=tdf["Tier"], x=tdf["Count"], orientation="h",
+            marker_color=[TIER_COLORS.get(t, UI_YELLOW) for t in tdf["Tier"]],
+            text=tdf["Label"], textposition="outside", cliponaxis=False,
+            hovertemplate="%{y}: %{x:,} companies<extra></extra>",
+        ))
         plotly_dark(fig, height=320, showlegend=False,
-                    margin=dict(t=20, b=40, l=170, r=110),
-                    xaxis_title="Companies (log scale)")
+                    margin=dict(t=20, b=44, l=180, r=110),
+                    xaxis_title="Companies (log scale)",
+                    # Plotly's default log axis prints every minor tick, so the
+                    # labels read 6 7 8 9 100 2 3 4 5 6 7 8 9 1000. Only the
+                    # decades mean anything here.
+                    xaxis=dict(type="log", tickmode="array",
+                               tickvals=[10, 100, 1000, 10000],
+                               ticktext=["10", "100", "1,000", "10,000"],
+                               range=[1, 4.6]),
+                    bargap=0.35)
         st.plotly_chart(fig, use_container_width=True)
         n_flagged = int(tier_counts.get("PRIORITY", 0) + tier_counts.get("DISSOLUTION_RISK", 0)
                         + tier_counts.get("BEHAVIORAL_ANOMALY", 0))
@@ -1947,290 +1948,291 @@ with tab1:
 # ----------------------------------------------------------------------------
 # TAB 2 - RISK TIERS (all four tiers selectable)
 # ----------------------------------------------------------------------------
-with tab2:
-    if "combined_risk_tier" not in prosp.columns:
-        st.warning("Risk tier data not available.")
-    else:
-        tier_counts = prosp["combined_risk_tier"].value_counts()
-
-        # Tier picker - default to PRIORITY since it's the most actionable
-        tier_options = ["PRIORITY", "DISSOLUTION_RISK", "BEHAVIORAL_ANOMALY", "LOW_CONCERN"]
-        tier_options = [t for t in tier_options if t in tier_counts.index]
-        tier_labels = [f"{t}  ({tier_counts.get(t, 0):,})" for t in tier_options]
-
-        # The dropdown already states the tier and its count, so a card beside it
-        # saying the same two things is furniture. The definition is what a reader
-        # cannot get from the dropdown, so that is all that goes underneath it.
-        sel_label = st.selectbox("Risk tier", tier_labels, index=0,
-                                 label_visibility="collapsed")
-        sel_tier = sel_label.split("  (")[0]
-        tier_color = TIER_COLORS.get(sel_tier, UI_YELLOW)
-        st.caption(TIER_DESCRIPTIONS.get(sel_tier, ""))
-
-        # Source the rows: PRIORITY → use priority df (has all columns); else use prosp
-        if sel_tier == "PRIORITY" and not priority.empty:
-            tier_df = priority.copy()
+if not IS_ENGAGEMENT:
+    with tab2:
+        if "combined_risk_tier" not in prosp.columns:
+            st.warning("Risk tier data not available.")
         else:
-            tier_df = prosp[prosp["combined_risk_tier"] == sel_tier].copy()
+            tier_counts = prosp["combined_risk_tier"].value_counts()
 
-        # step5_priority_companies.csv is a separate file, so it carries neither the
-        # entity label nor the ordering key. Map both across by company number, and
-        # fall back to the calibrated score if the key is unavailable.
-        _sort_col = RANK_COL
-        if RANK_COL == "_rank_score" and "company_num" in tier_df.columns:
-            if "_rank_score" not in tier_df.columns:
-                _rk = dict(zip(prosp["company_num"].map(company_key),
-                               prosp["_rank_score"]))
-                tier_df["_rank_score"] = tier_df["company_num"].map(
-                    lambda v: _rk.get(company_key(v), np.nan))
-            if tier_df["_rank_score"].isna().all():
-                _sort_col = "dissolution_risk_score"
-        if _sort_col not in tier_df.columns:
-            _sort_col = "dissolution_risk_score" if "dissolution_risk_score" in tier_df.columns else None
+            # Tier picker - default to PRIORITY since it's the most actionable
+            tier_options = ["PRIORITY", "DISSOLUTION_RISK", "BEHAVIORAL_ANOMALY", "LOW_CONCERN"]
+            tier_options = [t for t in tier_options if t in tier_counts.index]
+            tier_labels = [f"{t}  ({tier_counts.get(t, 0):,})" for t in tier_options]
 
-        # Ensure the SPV label is present regardless of which source built tier_df.
-        if (entity_types is not None and "company_num" in tier_df.columns
-                and "entity_type" not in tier_df.columns):
-            tier_df["entity_type"] = tier_df["company_num"].map(
-                lambda v: entity_types.get(company_key(v), "Unclassified"))
+            # The dropdown already states the tier and its count, so a card beside it
+            # saying the same two things is furniture. The definition is what a reader
+            # cannot get from the dropdown, so that is all that goes underneath it.
+            sel_label = st.selectbox("Risk tier", tier_labels, index=0,
+                                     label_visibility="collapsed")
+            sel_tier = sel_label.split("  (")[0]
+            tier_color = TIER_COLORS.get(sel_tier, UI_YELLOW)
+            st.caption(TIER_DESCRIPTIONS.get(sel_tier, ""))
 
-        st.markdown("")
-
-        # Filters
-        f1, f2, f3, f4 = st.columns([2, 2, 2, 2])
-        with f1:
-            counties = (["All"] + sorted(drop_unknowns(tier_df["county"]).unique().tolist())
-                        if "county" in tier_df.columns else ["All"])
-            sel_county = st.selectbox("County", counties, key=f"county_{sel_tier}")
-        with f2:
-            if "nace_v2_code" in tier_df.columns:
-                tier_df = add_sector_label(tier_df)
-                sectors = ["All"] + sorted(drop_unknowns(tier_df["sector_label"]).unique().tolist())
-                sel_sector = st.selectbox("Sector", sectors, key=f"sector_{sel_tier}")
+            # Source the rows: PRIORITY → use priority df (has all columns); else use prosp
+            if sel_tier == "PRIORITY" and not priority.empty:
+                tier_df = priority.copy()
             else:
-                sel_sector = "All"
-        with f3:
-            if "dissolution_risk_score" in tier_df.columns:
-                # The table this filters shows percentages, so the filter shows
-                # percentages. A slider reading 0.50 beside a column reading 59.6%
-                # invites the reader to think they are different quantities.
-                min_pct = st.slider("Minimum dissolution risk", 0, 100, 0, 5,
-                                    format="%d%%", key=f"score_{sel_tier}")
-                min_score = min_pct / 100.0
-            else:
-                min_score = 0.0
-        with f4:
-            if "entity_type" in tier_df.columns:
-                _counts = tier_df["entity_type"].value_counts()
-                _opts = ["All companies"] + [
-                    f"{lbl}  ({int(_counts.get(lbl, 0)):,})"
-                    for lbl in ("Special purpose vehicle", "Holding company",
-                                "Trading business", "Unclassified")
-                    if _counts.get(lbl, 0) > 0]
-                _pick = st.selectbox(
-                    "Entity type", _opts, key=f"ent_{sel_tier}",
-                    help="A special purpose vehicle is wound up on schedule once its "
-                         "purpose is served, so its exit is not distress. Unclassified "
-                         "means the company name carried no signal either way, not that "
-                         "the classification failed.")
-                sel_ent = "All companies" if _pick == "All companies" else _pick.split("  (")[0]
-            else:
-                sel_ent = "All companies"
+                tier_df = prosp[prosp["combined_risk_tier"] == sel_tier].copy()
 
-        filt = tier_df.copy()
-        if sel_county != "All" and "county" in filt.columns:
-            filt = filt[filt["county"] == sel_county]
-        if sel_sector != "All" and "sector_label" in filt.columns:
-            filt = filt[filt["sector_label"] == sel_sector]
-        if "dissolution_risk_score" in filt.columns:
-            filt = filt[filt["dissolution_risk_score"].fillna(0) >= min_score]
-        if sel_ent != "All companies" and "entity_type" in filt.columns:
-            filt = filt[filt["entity_type"] == sel_ent]
+            # step5_priority_companies.csv is a separate file, so it carries neither the
+            # entity label nor the ordering key. Map both across by company number, and
+            # fall back to the calibrated score if the key is unavailable.
+            _sort_col = RANK_COL
+            if RANK_COL == "_rank_score" and "company_num" in tier_df.columns:
+                if "_rank_score" not in tier_df.columns:
+                    _rk = dict(zip(prosp["company_num"].map(company_key),
+                                   prosp["_rank_score"]))
+                    tier_df["_rank_score"] = tier_df["company_num"].map(
+                        lambda v: _rk.get(company_key(v), np.nan))
+                if tier_df["_rank_score"].isna().all():
+                    _sort_col = "dissolution_risk_score"
+            if _sort_col not in tier_df.columns:
+                _sort_col = "dissolution_risk_score" if "dissolution_risk_score" in tier_df.columns else None
 
-        # Sort by score so the worst are at the top
-        if _sort_col:
-            filt = filt.sort_values(_sort_col, ascending=False)
+            # Ensure the SPV label is present regardless of which source built tier_df.
+            if (entity_types is not None and "company_num" in tier_df.columns
+                    and "entity_type" not in tier_df.columns):
+                tier_df["entity_type"] = tier_df["company_num"].map(
+                    lambda v: entity_types.get(company_key(v), "Unclassified"))
 
-        st.markdown(f"**{len(filt):,} companies match filters** "
-                    f"(showing first {min(200, len(filt))})")
+            st.markdown("")
 
-        display_cols = [c for c in ["company_num", "company_name", "county",
-                                    "company_age_years", "dissolution_risk_score",
-                                    "anomaly_band"]
-                        if c in filt.columns]
-        if "entity_type" in filt.columns:
-            display_cols = display_cols + ["entity_type"]
-        st.dataframe(
-            filt[display_cols].head(200).style.format({
-                "company_age_years": "{:.1f}",
-                "dissolution_risk_score": pct_txt,
-                "anomaly_band": band_txt,
-            }),
-            use_container_width=True,
-            height=420,
-        )
-
-        # Exportable watchlist: the auditor's take-away work product.
-        export_df = filt[display_cols].copy()
-        if "dissolution_risk_score" in export_df.columns:
-            export_df["dissolution_risk_score"] = (
-                export_df["dissolution_risk_score"] * 100).round(1)
-        if "anomaly_band" in export_df.columns:
-            export_df["anomaly_band"] = (export_df["anomaly_band"] * 100).round(1)
-        export_df = export_df.rename(columns={
-            "company_num": "CRO number", "company_name": "Company",
-            "county": "County", "company_age_years": "Age (years)",
-            "dissolution_risk_score": "Dissolution risk (%)",
-            "anomaly_band": "Anomaly band (top %)",
-            "entity_type": "Entity type",
-        })
-        csv_bytes = export_df.to_csv(index=False).encode("utf-8")
-        st.download_button(
-            "Download this watchlist (CSV)",
-            data=csv_bytes,
-            file_name=f"watchlist_{sel_tier.lower()}.csv",
-            mime="text/csv",
-            help="Export the filtered company list for monitoring or audit planning.",
-        )
-
-        with st.expander("Analytics platform feed (all scored companies)"):
-            st.caption("A flat file matched on company_num carrying the tier, the risk "
-                       "score, the top five contributing features with their signed "
-                       "contributions, and the model's validation statistics as "
-                       "provenance columns. Built so the scores can join an existing "
-                       "anomaly-detection layer rather than requiring a parallel "
-                       "platform.")
-            _helix_py = ROOT / "build_helix_export.py"
-            if not _helix_py.exists():
-                st.caption(f"build_helix_export.py not found next to {_THIS_FILE}.")
-            elif st.button("Build platform feed (CSV)", key="genhelix"):
-                try:
-                    from build_helix_export import build_helix_export
-                    _sp = OUTPUTS / "prospective_shap.csv"
-                    if not _sp.exists():
-                        st.caption("Needs outputs/prospective_shap.csv.")
-                    else:
-                        _fp = DATA_PROC / "prospective_final.csv"
-                        with st.spinner("Building feed…"):
-                            _hx = build_helix_export(_sp, _fp if _fp.exists() else None)
-                        st.download_button(
-                            "Download platform feed (CSV)",
-                            data=_hx.to_csv(index=False).encode("utf-8"),
-                            file_name="helix_export.csv", mime="text/csv",
-                            key="dlhelix")
-                        st.caption(f"{len(_hx):,} rows, {len(_hx.columns)} columns.")
-                except Exception as _e:
-                    st.caption(f"Could not build the feed ({type(_e).__name__}: {_e}).")
-
-        st.markdown("---")
-        colF1, colF2 = st.columns(2)
-
-        with colF1:
-            st.markdown("##### How These Companies Were Flagged")
-            if {"dissolution_risk_score", "if_anomaly_score"}.issubset(filt.columns) and not filt.empty:
-                hi_risk = filt["dissolution_risk_score"] >= 0.5
-                hi_anom = filt["if_anomaly_score"] >= 0.5
-                both = int((hi_risk & hi_anom).sum())
-                risk_only = int((hi_risk & ~hi_anom).sum())
-                anom_only = int((~hi_risk & hi_anom).sum())
-                neither = int((~hi_risk & ~hi_anom).sum())
-                cats = pd.DataFrame({
-                    "Flag source": [
-                        "Both models (highest priority)",
-                        "Dissolution risk only (Stage 1)",
-                        "Anomaly only (Stage 2)",
-                        "Lower signal",
-                    ],
-                    "Companies": [both, risk_only, anom_only, neither],
-                })
-                cats = cats[cats["Companies"] > 0]
-                cmap = {
-                    "Both models (highest priority)": "#C1121F",
-                    "Dissolution risk only (Stage 1)": "#E07B00",
-                    "Anomaly only (Stage 2)": "#2E86DE",
-                    "Lower signal": "#1A7340",
-                }
-                fig = go.Figure(go.Pie(
-                    labels=cats["Flag source"], values=cats["Companies"], hole=0.55,
-                    marker=dict(colors=[cmap.get(x, "#888") for x in cats["Flag source"]]),
-                    textinfo="label+percent", textposition="outside",
-                    textfont=dict(size=12, color="#FFFFFF"), sort=False,
-                ))
-                fig.update_layout(
-                    height=340, margin=dict(t=30, b=30, l=30, r=30),
-                    paper_bgcolor="rgba(0,0,0,0)", font={"color": "#FFFFFF"},
-                    showlegend=False,
-                )
-                st.plotly_chart(fig, use_container_width=True)
-
-        with colF2:
-            st.markdown("##### Risk Score Spread")
-            if "dissolution_risk_score" in filt.columns and not filt.empty:
-                _s = pd.to_numeric(filt["dissolution_risk_score"],
-                                   errors="coerce").dropna()
-                box = go.Figure(go.Box(
-                    y=_s, name=sel_tier,
-                    marker_color="#4EA8DE", line_color="#4EA8DE",
-                    fillcolor="rgba(78,168,222,0.25)", boxmean=True,
-                    boxpoints="outliers",
-                    hoverinfo="skip",
-                ))
-                # Plotly prints eight statistics on hover and nobody hovers during
-                # a demo, so the same eight are pinned beside the box. The fences
-                # are not decorative: they are where the whiskers stop, and any
-                # point beyond one is drawn as an outlier. They are computed the way
-                # Plotly computes them, as the most extreme observation still inside
-                # 1.5 x IQR, which is why a fence equal to the max means there are
-                # no outliers above it.
-                _H = 420
-                if len(_s):
-                    _q1, _q3 = _s.quantile(0.25), _s.quantile(0.75)
-                    _iqr = _q3 - _q1
-                    _uf = _s[_s <= _q3 + 1.5 * _iqr].max()
-                    _lf = _s[_s >= _q1 - 1.5 * _iqr].min()
-                    _stats = [("max", _s.max()), ("upper fence", _uf),
-                              ("q3", _q3), ("median", _s.median()),
-                              ("mean", _s.mean()), ("q1", _q1),
-                              ("lower fence", _lf), ("min", _s.min())]
-
-                    # Labels are placed at their own value, then pushed down only
-                    # far enough to clear the one above. Two of these commonly share
-                    # a value exactly (max with the upper fence when there are no
-                    # outliers above, min with the lower fence when there are none
-                    # below), so without this they would print on top of each other.
-                    _lo, _hi = float(_s.min()), float(_s.max())
-                    _pad = max((_hi - _lo) * 0.06, 0.01)
-                    _y0, _y1 = _lo - _pad, _hi + _pad
-                    _plot_px = _H - 46
-                    _MIN_GAP = 23
-                    _used = []
-                    for _k, _v in sorted(_stats, key=lambda t: -t[1]):
-                        _true_px = (1 - (_v - _y0) / (_y1 - _y0)) * _plot_px
-                        _px = _true_px
-                        while any(abs(_px - u) < _MIN_GAP for u in _used):
-                            _px += _MIN_GAP
-                        _used.append(_px)
-                        box.add_annotation(
-                            x=0.60, xref="paper", y=_v, yref="y",
-                            yshift=-(_px - _true_px),
-                            text=f"({sel_tier}, {_k}: {_v:.1%})",
-                            showarrow=True, arrowhead=0, arrowwidth=1,
-                            arrowcolor="rgba(255,230,0,.55)", ax=-26, ay=0,
-                            xanchor="left",
-                            bgcolor="rgba(26,26,35,.92)", bordercolor=UI_YELLOW,
-                            borderwidth=1, borderpad=5,
-                            font=dict(family="IBM Plex Mono, monospace", size=10.5,
-                                      color="#FFFFFF"))
-                    plotly_dark(box, height=_H, showlegend=False,
-                                margin=dict(t=18, b=28, l=52, r=26),
-                                yaxis_title="Dissolution risk (calibrated probability)",
-                                yaxis=dict(tickformat=".0%", range=[_y0, _y1]))
+            # Filters
+            f1, f2, f3, f4 = st.columns([2, 2, 2, 2])
+            with f1:
+                counties = (["All"] + sorted(drop_unknowns(tier_df["county"]).unique().tolist())
+                            if "county" in tier_df.columns else ["All"])
+                sel_county = st.selectbox("County", counties, key=f"county_{sel_tier}")
+            with f2:
+                if "nace_v2_code" in tier_df.columns:
+                    tier_df = add_sector_label(tier_df)
+                    sectors = ["All"] + sorted(drop_unknowns(tier_df["sector_label"]).unique().tolist())
+                    sel_sector = st.selectbox("Sector", sectors, key=f"sector_{sel_tier}")
                 else:
-                    plotly_dark(box, height=_H, showlegend=False,
-                                margin=dict(t=18, b=28, l=52, r=26),
-                                yaxis_title="Dissolution risk (calibrated probability)",
-                                yaxis=dict(tickformat=".0%"))
-                st.plotly_chart(box, use_container_width=True)
+                    sel_sector = "All"
+            with f3:
+                if "dissolution_risk_score" in tier_df.columns:
+                    # The table this filters shows percentages, so the filter shows
+                    # percentages. A slider reading 0.50 beside a column reading 59.6%
+                    # invites the reader to think they are different quantities.
+                    min_pct = st.slider("Minimum dissolution risk", 0, 100, 0, 5,
+                                        format="%d%%", key=f"score_{sel_tier}")
+                    min_score = min_pct / 100.0
+                else:
+                    min_score = 0.0
+            with f4:
+                if "entity_type" in tier_df.columns:
+                    _counts = tier_df["entity_type"].value_counts()
+                    _opts = ["All companies"] + [
+                        f"{lbl}  ({int(_counts.get(lbl, 0)):,})"
+                        for lbl in ("Special purpose vehicle", "Holding company",
+                                    "Trading business", "Unclassified")
+                        if _counts.get(lbl, 0) > 0]
+                    _pick = st.selectbox(
+                        "Entity type", _opts, key=f"ent_{sel_tier}",
+                        help="A special purpose vehicle is wound up on schedule once its "
+                             "purpose is served, so its exit is not distress. Unclassified "
+                             "means the company name carried no signal either way, not that "
+                             "the classification failed.")
+                    sel_ent = "All companies" if _pick == "All companies" else _pick.split("  (")[0]
+                else:
+                    sel_ent = "All companies"
+
+            filt = tier_df.copy()
+            if sel_county != "All" and "county" in filt.columns:
+                filt = filt[filt["county"] == sel_county]
+            if sel_sector != "All" and "sector_label" in filt.columns:
+                filt = filt[filt["sector_label"] == sel_sector]
+            if "dissolution_risk_score" in filt.columns:
+                filt = filt[filt["dissolution_risk_score"].fillna(0) >= min_score]
+            if sel_ent != "All companies" and "entity_type" in filt.columns:
+                filt = filt[filt["entity_type"] == sel_ent]
+
+            # Sort by score so the worst are at the top
+            if _sort_col:
+                filt = filt.sort_values(_sort_col, ascending=False)
+
+            st.markdown(f"**{len(filt):,} companies match filters** "
+                        f"(showing first {min(200, len(filt))})")
+
+            display_cols = [c for c in ["company_num", "company_name", "county",
+                                        "company_age_years", "dissolution_risk_score",
+                                        "anomaly_band"]
+                            if c in filt.columns]
+            if "entity_type" in filt.columns:
+                display_cols = display_cols + ["entity_type"]
+            st.dataframe(
+                filt[display_cols].head(200).style.format({
+                    "company_age_years": "{:.1f}",
+                    "dissolution_risk_score": pct_txt,
+                    "anomaly_band": band_txt,
+                }),
+                use_container_width=True,
+                height=420,
+            )
+
+            # Exportable watchlist: the auditor's take-away work product.
+            export_df = filt[display_cols].copy()
+            if "dissolution_risk_score" in export_df.columns:
+                export_df["dissolution_risk_score"] = (
+                    export_df["dissolution_risk_score"] * 100).round(1)
+            if "anomaly_band" in export_df.columns:
+                export_df["anomaly_band"] = (export_df["anomaly_band"] * 100).round(1)
+            export_df = export_df.rename(columns={
+                "company_num": "CRO number", "company_name": "Company",
+                "county": "County", "company_age_years": "Age (years)",
+                "dissolution_risk_score": "Dissolution risk (%)",
+                "anomaly_band": "Anomaly band (top %)",
+                "entity_type": "Entity type",
+            })
+            csv_bytes = export_df.to_csv(index=False).encode("utf-8")
+            st.download_button(
+                "Download this watchlist (CSV)",
+                data=csv_bytes,
+                file_name=f"watchlist_{sel_tier.lower()}.csv",
+                mime="text/csv",
+                help="Export the filtered company list for monitoring or audit planning.",
+            )
+
+            with st.expander("Analytics platform feed (all scored companies)"):
+                st.caption("A flat file matched on company_num carrying the tier, the risk "
+                           "score, the top five contributing features with their signed "
+                           "contributions, and the model's validation statistics as "
+                           "provenance columns. Built so the scores can join an existing "
+                           "anomaly-detection layer rather than requiring a parallel "
+                           "platform.")
+                _helix_py = ROOT / "build_helix_export.py"
+                if not _helix_py.exists():
+                    st.caption(f"build_helix_export.py not found next to {_THIS_FILE}.")
+                elif st.button("Build platform feed (CSV)", key="genhelix"):
+                    try:
+                        from build_helix_export import build_helix_export
+                        _sp = OUTPUTS / "prospective_shap.csv"
+                        if not _sp.exists():
+                            st.caption("Needs outputs/prospective_shap.csv.")
+                        else:
+                            _fp = DATA_PROC / "prospective_final.csv"
+                            with st.spinner("Building feed…"):
+                                _hx = build_helix_export(_sp, _fp if _fp.exists() else None)
+                            st.download_button(
+                                "Download platform feed (CSV)",
+                                data=_hx.to_csv(index=False).encode("utf-8"),
+                                file_name="helix_export.csv", mime="text/csv",
+                                key="dlhelix")
+                            st.caption(f"{len(_hx):,} rows, {len(_hx.columns)} columns.")
+                    except Exception as _e:
+                        st.caption(f"Could not build the feed ({type(_e).__name__}: {_e}).")
+
+            st.markdown("---")
+            colF1, colF2 = st.columns(2)
+
+            with colF1:
+                st.markdown("##### How These Companies Were Flagged")
+                if {"dissolution_risk_score", "if_anomaly_score"}.issubset(filt.columns) and not filt.empty:
+                    hi_risk = filt["dissolution_risk_score"] >= 0.5
+                    hi_anom = filt["if_anomaly_score"] >= 0.5
+                    both = int((hi_risk & hi_anom).sum())
+                    risk_only = int((hi_risk & ~hi_anom).sum())
+                    anom_only = int((~hi_risk & hi_anom).sum())
+                    neither = int((~hi_risk & ~hi_anom).sum())
+                    cats = pd.DataFrame({
+                        "Flag source": [
+                            "Both models (highest priority)",
+                            "Dissolution risk only (Stage 1)",
+                            "Anomaly only (Stage 2)",
+                            "Lower signal",
+                        ],
+                        "Companies": [both, risk_only, anom_only, neither],
+                    })
+                    cats = cats[cats["Companies"] > 0]
+                    cmap = {
+                        "Both models (highest priority)": "#C1121F",
+                        "Dissolution risk only (Stage 1)": "#E07B00",
+                        "Anomaly only (Stage 2)": "#2E86DE",
+                        "Lower signal": "#1A7340",
+                    }
+                    fig = go.Figure(go.Pie(
+                        labels=cats["Flag source"], values=cats["Companies"], hole=0.55,
+                        marker=dict(colors=[cmap.get(x, "#888") for x in cats["Flag source"]]),
+                        textinfo="label+percent", textposition="outside",
+                        textfont=dict(size=12, color="#FFFFFF"), sort=False,
+                    ))
+                    fig.update_layout(
+                        height=340, margin=dict(t=30, b=30, l=30, r=30),
+                        paper_bgcolor="rgba(0,0,0,0)", font={"color": "#FFFFFF"},
+                        showlegend=False,
+                    )
+                    st.plotly_chart(fig, use_container_width=True)
+
+            with colF2:
+                st.markdown("##### Risk Score Spread")
+                if "dissolution_risk_score" in filt.columns and not filt.empty:
+                    _s = pd.to_numeric(filt["dissolution_risk_score"],
+                                       errors="coerce").dropna()
+                    box = go.Figure(go.Box(
+                        y=_s, name=sel_tier,
+                        marker_color="#4EA8DE", line_color="#4EA8DE",
+                        fillcolor="rgba(78,168,222,0.25)", boxmean=True,
+                        boxpoints="outliers",
+                        hoverinfo="skip",
+                    ))
+                    # Plotly prints eight statistics on hover and nobody hovers during
+                    # a demo, so the same eight are pinned beside the box. The fences
+                    # are not decorative: they are where the whiskers stop, and any
+                    # point beyond one is drawn as an outlier. They are computed the way
+                    # Plotly computes them, as the most extreme observation still inside
+                    # 1.5 x IQR, which is why a fence equal to the max means there are
+                    # no outliers above it.
+                    _H = 420
+                    if len(_s):
+                        _q1, _q3 = _s.quantile(0.25), _s.quantile(0.75)
+                        _iqr = _q3 - _q1
+                        _uf = _s[_s <= _q3 + 1.5 * _iqr].max()
+                        _lf = _s[_s >= _q1 - 1.5 * _iqr].min()
+                        _stats = [("max", _s.max()), ("upper fence", _uf),
+                                  ("q3", _q3), ("median", _s.median()),
+                                  ("mean", _s.mean()), ("q1", _q1),
+                                  ("lower fence", _lf), ("min", _s.min())]
+
+                        # Labels are placed at their own value, then pushed down only
+                        # far enough to clear the one above. Two of these commonly share
+                        # a value exactly (max with the upper fence when there are no
+                        # outliers above, min with the lower fence when there are none
+                        # below), so without this they would print on top of each other.
+                        _lo, _hi = float(_s.min()), float(_s.max())
+                        _pad = max((_hi - _lo) * 0.06, 0.01)
+                        _y0, _y1 = _lo - _pad, _hi + _pad
+                        _plot_px = _H - 46
+                        _MIN_GAP = 23
+                        _used = []
+                        for _k, _v in sorted(_stats, key=lambda t: -t[1]):
+                            _true_px = (1 - (_v - _y0) / (_y1 - _y0)) * _plot_px
+                            _px = _true_px
+                            while any(abs(_px - u) < _MIN_GAP for u in _used):
+                                _px += _MIN_GAP
+                            _used.append(_px)
+                            box.add_annotation(
+                                x=0.60, xref="paper", y=_v, yref="y",
+                                yshift=-(_px - _true_px),
+                                text=f"({sel_tier}, {_k}: {_v:.1%})",
+                                showarrow=True, arrowhead=0, arrowwidth=1,
+                                arrowcolor="rgba(255,230,0,.55)", ax=-26, ay=0,
+                                xanchor="left",
+                                bgcolor="rgba(26,26,35,.92)", bordercolor=UI_YELLOW,
+                                borderwidth=1, borderpad=5,
+                                font=dict(family="IBM Plex Mono, monospace", size=10.5,
+                                          color="#FFFFFF"))
+                        plotly_dark(box, height=_H, showlegend=False,
+                                    margin=dict(t=18, b=28, l=52, r=26),
+                                    yaxis_title="Dissolution risk (calibrated probability)",
+                                    yaxis=dict(tickformat=".0%", range=[_y0, _y1]))
+                    else:
+                        plotly_dark(box, height=_H, showlegend=False,
+                                    margin=dict(t=18, b=28, l=52, r=26),
+                                    yaxis_title="Dissolution risk (calibrated probability)",
+                                    yaxis=dict(tickformat=".0%"))
+                    st.plotly_chart(box, use_container_width=True)
 
 
 # ----------------------------------------------------------------------------
@@ -2586,70 +2588,71 @@ with tab3:
 # ----------------------------------------------------------------------------
 # TAB 4 - MODEL PERFORMANCE
 # ----------------------------------------------------------------------------
-with tab4:
-    st.markdown("#### Five-Model Comparison")
-    st.caption("All models on identical train/test split. Test set never touched during HPO. "
-               "Optuna 100 trials × 5-fold CV per tree model.")
+if not IS_ENGAGEMENT:
+    with tab4:
+        st.markdown("#### Five-Model Comparison")
+        st.caption("All models on identical train/test split. Test set never touched during HPO. "
+                   "Optuna 100 trials × 5-fold CV per tree model.")
 
-    if comp_df.empty:
-        st.warning("model_comparison.csv not found.")
-    else:
-        if "avg_precision" in comp_df.columns:
-            sorted_df = comp_df.sort_values("avg_precision", ascending=False).reset_index(drop=True)
+        if comp_df.empty:
+            st.warning("model_comparison.csv not found.")
         else:
-            sorted_df = comp_df.reset_index(drop=True)
+            if "avg_precision" in comp_df.columns:
+                sorted_df = comp_df.sort_values("avg_precision", ascending=False).reset_index(drop=True)
+            else:
+                sorted_df = comp_df.reset_index(drop=True)
 
-        disp_cols = [c for c in ("model", "avg_precision", "ap_ci_lo", "ap_ci_hi",
-                                 "auc_roc", "auc_ci_lo", "auc_ci_hi",
-                                 "f1", "ks_stat", "brier_score")
-                     if c in sorted_df.columns]
+            disp_cols = [c for c in ("model", "avg_precision", "ap_ci_lo", "ap_ci_hi",
+                                     "auc_roc", "auc_ci_lo", "auc_ci_hi",
+                                     "f1", "ks_stat", "brier_score")
+                         if c in sorted_df.columns]
 
-        def highlight_first(row):
-            if row.name == 0:
-                return [f"background-color: {UI_YELLOW}33; color: #FFF"] * len(row)
-            return [""] * len(row)
+            def highlight_first(row):
+                if row.name == 0:
+                    return [f"background-color: {UI_YELLOW}33; color: #FFF"] * len(row)
+                return [""] * len(row)
 
-        st.dataframe(
-            sorted_df[disp_cols].style.apply(highlight_first, axis=1).format(precision=4),
-            use_container_width=True, height=240,
-        )
+            st.dataframe(
+                sorted_df[disp_cols].style.apply(highlight_first, axis=1).format(precision=4),
+                use_container_width=True, height=240,
+            )
 
-        if {"avg_precision", "auc_roc"}.issubset(sorted_df.columns):
-            comp = sorted_df[["model", "avg_precision", "auc_roc"]].copy()
-            fig = go.Figure()
-            fig.add_trace(go.Bar(
-                y=comp["model"], x=comp["avg_precision"], orientation="h",
-                name="Average precision (rare-event detection)",
-                marker_color="#FFE600",
-                text=comp["avg_precision"].map("{:.3f}".format),
-                textposition="outside",
-            ))
-            fig.add_trace(go.Bar(
-                y=comp["model"], x=comp["auc_roc"], orientation="h",
-                name="AUC-ROC (overall ranking)",
-                marker_color="#2E86DE",
-                text=comp["auc_roc"].map("{:.3f}".format),
-                textposition="outside",
-            ))
-            fig.update_layout(barmode="group", height=440,
-                              margin=dict(t=40, b=40, l=120, r=60),
-                              paper_bgcolor="rgba(0,0,0,0)",
-                              plot_bgcolor="rgba(0,0,0,0)",
-                              font={"color": "#FFFFFF"},
-                              legend=dict(orientation="h", y=1.08, x=0),
-                              xaxis=dict(range=[0, 1.05], gridcolor="#2a2a3a"))
-            fig.update_yaxes(autorange="reversed")
-            st.plotly_chart(fig, use_container_width=True)
-            st.caption("XGBoost leads on average precision, the metric that matters for "
-                       "catching rare dissolutions. Logistic Regression scores higher on "
-                       "AUC but far lower on precision, which is why it is not selected.")
+            if {"avg_precision", "auc_roc"}.issubset(sorted_df.columns):
+                comp = sorted_df[["model", "avg_precision", "auc_roc"]].copy()
+                fig = go.Figure()
+                fig.add_trace(go.Bar(
+                    y=comp["model"], x=comp["avg_precision"], orientation="h",
+                    name="Average precision (rare-event detection)",
+                    marker_color="#FFE600",
+                    text=comp["avg_precision"].map("{:.3f}".format),
+                    textposition="outside",
+                ))
+                fig.add_trace(go.Bar(
+                    y=comp["model"], x=comp["auc_roc"], orientation="h",
+                    name="AUC-ROC (overall ranking)",
+                    marker_color="#2E86DE",
+                    text=comp["auc_roc"].map("{:.3f}".format),
+                    textposition="outside",
+                ))
+                fig.update_layout(barmode="group", height=440,
+                                  margin=dict(t=40, b=40, l=120, r=60),
+                                  paper_bgcolor="rgba(0,0,0,0)",
+                                  plot_bgcolor="rgba(0,0,0,0)",
+                                  font={"color": "#FFFFFF"},
+                                  legend=dict(orientation="h", y=1.08, x=0),
+                                  xaxis=dict(range=[0, 1.05], gridcolor="#2a2a3a"))
+                fig.update_yaxes(autorange="reversed")
+                st.plotly_chart(fig, use_container_width=True)
+                st.caption("XGBoost leads on average precision, the metric that matters for "
+                           "catching rare dissolutions. Logistic Regression scores higher on "
+                           "AUC but far lower on precision, which is why it is not selected.")
 
-        st.markdown("---")
-        st.markdown("##### Research Question Validation")
+            st.markdown("---")
+            st.markdown("##### Research Question Validation")
 
-        rq_c1, rq_c2, rq_c3 = st.columns(3)
-        with rq_c1:
-            st.markdown(f"""<div class="rq-card">
+            rq_c1, rq_c2, rq_c3 = st.columns(3)
+            with rq_c1:
+                st.markdown(f"""<div class="rq-card">
 <div class="h">RQ1 · AUC target ≥ 0.88</div>
 <div class="v">{auc_str}</div>
 <div class="s">PASSED · Du Jardin (2021) 0.80–0.88 exceeded</div>
@@ -2707,48 +2710,49 @@ so test AP is harder. Both arms of every model see the same temporal split.
 # ----------------------------------------------------------------------------
 # TAB 5 - SHAP INTELLIGENCE
 # ----------------------------------------------------------------------------
-with tab5:
-    st.markdown("#### Which Risk Factors Matter Most")
-    st.caption("Ranked by how much each factor influences the model's dissolution-risk "
-               "assessment across the company population.")
+if not IS_ENGAGEMENT:
+    with tab5:
+        st.markdown("#### Which Risk Factors Matter Most")
+        st.caption("Ranked by how much each factor influences the model's dissolution-risk "
+                   "assessment across the company population.")
 
-    if mean_abs_shap is None or not feature_cols:
-        st.warning("Risk-factor data not available. Run the explainability step first.")
-    else:
-        n_show = st.slider("Features to display", 10, len(feature_cols), 25)
-        ranked = pd.DataFrame({
-            "Feature": [feature_label(f) for f in feature_cols],
-            "MeanAbsSHAP": mean_abs_shap,
-        }).sort_values("MeanAbsSHAP", ascending=False).head(n_show)
+        if mean_abs_shap is None or not feature_cols:
+            st.warning("Risk-factor data not available. Run the explainability step first.")
+        else:
+            n_show = st.slider("Features to display", 10, len(feature_cols), 25)
+            ranked = pd.DataFrame({
+                "Feature": [feature_label(f) for f in feature_cols],
+                "MeanAbsSHAP": mean_abs_shap,
+            }).sort_values("MeanAbsSHAP", ascending=False).head(n_show)
 
-        fig = px.bar(ranked.iloc[::-1], x="MeanAbsSHAP", y="Feature", orientation="h",
-                     color_discrete_sequence=[UI_YELLOW])
-        plotly_dark(fig, height=max(420, n_show * 18),
-                    margin=dict(t=20, b=40, l=250, r=20),
-                    xaxis_title="Overall influence on dissolution risk")
-        st.plotly_chart(fig, use_container_width=True)
+            fig = px.bar(ranked.iloc[::-1], x="MeanAbsSHAP", y="Feature", orientation="h",
+                         color_discrete_sequence=[UI_YELLOW])
+            plotly_dark(fig, height=max(420, n_show * 18),
+                        margin=dict(t=20, b=40, l=250, r=20),
+                        xaxis_title="Overall influence on dissolution risk")
+            st.plotly_chart(fig, use_container_width=True)
 
-        st.markdown("---")
-        st.markdown("##### Top 5 Risk Drivers")
-        explanations = {
-            "ar_filed_count": "Total Annual Returns filed across the company's life. Companies that stop filing are companies that are dying. Strongest single dissolution signal.",
-            "company_age_years": "Years since incorporation. Both very young and very old extremes carry risk in different ways; the model learns the non-linear shape.",
-            "annual_submission_rate": "Filings per year of tenure. Sustained low rates indicate operational drag; very high may indicate restructuring.",
-            "total_submissions": "All-time submission count to CRO. Captures overall depth of engagement with the register.",
-            "director_change_count": "Director appointments and resignations. Frequent changes correlate with governance instability and pre-dissolution churn.",
-            "submission_history_years": "Length of CRO interaction history. Shorter histories carry less signal but elevated baseline risk.",
-            "other_form_count": "Filings outside the standard AR / accounts cycle. Captures restructuring activity.",
-            "age_vs_sector_median": "Company age relative to sector median. Sector-relative outliers carry signal.",
-            "days_since_last_name_change": "Time since the last name change. Recent name changes correlate with restructuring or rebranding.",
-            "name_change_count": "Total name changes. Frequent renaming correlates with corporate instability.",
-        }
-        import re as _re
-        for _, r in ranked.head(5).iterrows():
-            name = r["Feature"]; val = r["MeanAbsSHAP"]
-            raw = _re.search(r"\(([^)]+)\)\s*$", name)
-            raw_key = raw.group(1) if raw else name
-            expl = explanations.get(raw_key, "Behavioural or structural factor derived from CRO filings.")
-            st.markdown(f"""<div class="shap-driver">
+            st.markdown("---")
+            st.markdown("##### Top 5 Risk Drivers")
+            explanations = {
+                "ar_filed_count": "Total Annual Returns filed across the company's life. Companies that stop filing are companies that are dying. Strongest single dissolution signal.",
+                "company_age_years": "Years since incorporation. Both very young and very old extremes carry risk in different ways; the model learns the non-linear shape.",
+                "annual_submission_rate": "Filings per year of tenure. Sustained low rates indicate operational drag; very high may indicate restructuring.",
+                "total_submissions": "All-time submission count to CRO. Captures overall depth of engagement with the register.",
+                "director_change_count": "Director appointments and resignations. Frequent changes correlate with governance instability and pre-dissolution churn.",
+                "submission_history_years": "Length of CRO interaction history. Shorter histories carry less signal but elevated baseline risk.",
+                "other_form_count": "Filings outside the standard AR / accounts cycle. Captures restructuring activity.",
+                "age_vs_sector_median": "Company age relative to sector median. Sector-relative outliers carry signal.",
+                "days_since_last_name_change": "Time since the last name change. Recent name changes correlate with restructuring or rebranding.",
+                "name_change_count": "Total name changes. Frequent renaming correlates with corporate instability.",
+            }
+            import re as _re
+            for _, r in ranked.head(5).iterrows():
+                name = r["Feature"]; val = r["MeanAbsSHAP"]
+                raw = _re.search(r"\(([^)]+)\)\s*$", name)
+                raw_key = raw.group(1) if raw else name
+                expl = explanations.get(raw_key, "Behavioural or structural factor derived from CRO filings.")
+                st.markdown(f"""<div class="shap-driver">
 <div style="display:flex;justify-content:space-between;align-items:center;">
 <span style="color:{UI_YELLOW};font-weight:600;font-size:1.0rem;">{name}</span>
 <span style="color:#FFF;font-family:monospace;">influence {val:.2f}</span>
@@ -2777,14 +2781,16 @@ with tab5:
 # ----------------------------------------------------------------------------
 # TAB 6 - STAGE 2 NLP
 # ----------------------------------------------------------------------------
-with tab7:
-    with safe_block("Client Portfolio"):
-        render_portfolio_tab()
+if IS_ENGAGEMENT:
+    with tab7:
+        with safe_block("Client Portfolio"):
+            render_portfolio_tab()
 
 
-with tab6:
-    with safe_block("Model Validation"):
-        render_stage2_tab()
+if not IS_ENGAGEMENT:
+    with tab6:
+        with safe_block("Model Validation"):
+            render_stage2_tab()
 
 
 # Footer
