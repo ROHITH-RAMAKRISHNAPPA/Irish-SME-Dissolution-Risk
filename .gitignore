@@ -71,3 +71,9 @@ build_deploy_bundle.py
 *.log
 *.tmp
 ~$*
+# Working scripts. Kept locally, not part of the submitted artefact.
+check_raw.py
+diagnose_score_reconciliation.py
+dump_gains_cells.py
+rebuild_triage_gains.py
+hud_preview.py
