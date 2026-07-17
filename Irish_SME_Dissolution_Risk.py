@@ -19,7 +19,6 @@ for live narrative generation. Without one, saved narratives are still shown.
 
 import os
 import re
-import base64
 import pathlib
 from datetime import datetime
 import warnings
@@ -2572,14 +2571,14 @@ with tab3:
                                 mime="application/pdf",
                                 key=f"dlrep_{_cnum}",
                             )
-                            _b64 = base64.b64encode(_pdf).decode()
-                            st.markdown(
-                                f'<iframe src="data:application/pdf;base64,{_b64}" '
-                                f'width="100%" height="800" style="border:1px solid '
-                                f'{UI_MID};border-radius:6px;"></iframe>',
-                                unsafe_allow_html=True)
-                            st.caption("If the preview does not display in your browser, "
-                                       "use the download button above.")
+                            # No inline preview. Chrome blocks data: URLs inside
+                            # an iframe, which is the only way to embed a PDF held
+                            # in memory, so the preview renders as a blocked-page
+                            # notice rather than the document. The download works.
+                            st.caption(f"{len(_pdf) / 1024:.0f} KB, two pages: risk "
+                                       f"rating, company profile, key risk indicators, "
+                                       f"filing timeline, narrative summary, and "
+                                       f"review guidance.")
                     except Exception as _e:
                         st.caption(f"Could not build the report for this company ({_e}).")
 
@@ -2697,12 +2696,9 @@ so test AP is harder. Both arms of every model see the same temporal split.
                 st.download_button("Download model card (PDF)", data=_card,
                                    file_name="model_card.pdf",
                                    mime="application/pdf", key="dlcard")
-                _cb64 = base64.b64encode(_card).decode()
-                st.markdown(
-                    f'<iframe src="data:application/pdf;base64,{_cb64}" '
-                    f'width="100%" height="700" style="border:1px solid '
-                    f'{UI_MID};border-radius:6px;"></iframe>',
-                    unsafe_allow_html=True)
+                st.caption(f"{len(_card) / 1024:.0f} KB: intended use, headline "
+                           f"metrics, validation design, limitations, and data "
+                           f"lineage.")
             except Exception as _e:
                 st.caption(f"Could not build the model card ({type(_e).__name__}: {_e}). "
                            "It needs reportlab: pip install reportlab")

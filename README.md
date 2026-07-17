@@ -10,7 +10,7 @@ An early-warning system that predicts Irish SME dissolution from public CRO fili
 
 ## Project Report & Data
 
-**[Google Drive - Data](https://drive.google.com/drive/folders/1vwL-0A0CgKgCAE4ZmlaPjwI2VDda79ny?usp=sharing)**
+**[Google Drive - Data](https://drive.google.com/drive/folders/1y0xqHsygUxtWCN4kH3yiEfyXiGky0Yy8?usp=drive_link)**
 
 Includes the submitted PDF report, appendix, and the raw CRO, CSO, Orbis and Nexis files that are too large for GitHub.
 
@@ -103,10 +103,10 @@ The concordance figures measure faithfulness, not discovery. The prompt supplies
 │   ├── 00_config.ipynb                      # paths, constants, feature registry
 │   ├── 01_data_loading.ipynb                # CRO, CSO, Orbis, Nexis ingestion
 │   ├── 02_feature_engineering_rebuilt.ipynb # 84 features, train-only winsorisation
-│   ├── 03_eda.ipynb                         # 23 dissertation figures
-│   ├── 04_model_training.ipynb              # 5 models, Optuna, isotonic calibration
-│   ├── 05_anomaly_detection.ipynb           # Isolation Forest, LOF, permutation nulls
-│   ├── 06_shap_explainability.ipynb         # global and per-company SHAP
+│   ├── 03_model_training.ipynb              # 5 models, Optuna, isotonic calibration
+│   ├── 04_anomaly_detection.ipynb           # Isolation Forest, LOF, permutation nulls
+│   ├── 05_shap_explainability.ipynb         # global and per-company SHAP
+│   ├── 06_figures.ipynb                     # 23 dissertation figures, runs last
 │   ├── ablation_financial_value.ipynb       # the thesis experiment
 │   └── ablation_annual_submission_rate.ipynb
 │
@@ -142,10 +142,10 @@ pip install -r requirements.txt
 jupyter nbconvert --to notebook --execute notebooks/00_config.ipynb
 jupyter nbconvert --to notebook --execute notebooks/01_data_loading.ipynb
 jupyter nbconvert --to notebook --execute notebooks/02_feature_engineering_rebuilt.ipynb
-jupyter nbconvert --to notebook --execute notebooks/03_eda.ipynb
-jupyter nbconvert --to notebook --execute notebooks/04_model_training.ipynb
-jupyter nbconvert --to notebook --execute notebooks/05_anomaly_detection.ipynb
-jupyter nbconvert --to notebook --execute notebooks/06_shap_explainability.ipynb
+jupyter nbconvert --to notebook --execute notebooks/03_model_training.ipynb
+jupyter nbconvert --to notebook --execute notebooks/04_anomaly_detection.ipynb
+jupyter nbconvert --to notebook --execute notebooks/05_shap_explainability.ipynb
+jupyter nbconvert --to notebook --execute notebooks/06_figures.ipynb
 
 python nlp/nlp_04_llm_extract.py
 python nlp/nlp_06_entity_type.py
@@ -157,6 +157,10 @@ streamlit run Irish_SME_Dissolution_Risk.py
 ```
 
 nlp_05 and nlp_07 are re-run after nlp_06 because both consume its output.
+
+06_figures runs last because it reads the trained model, the model comparison
+table, and the Stage 2 outputs. It builds the dissertation figures rather than
+exploring the data, so it cannot run before the results it draws.
 
 
 ## Data Sources
@@ -189,15 +193,13 @@ Every company is scored at an observation date, and its outcome is read from a 2
 
 ## Team
 
-| Member |
-|---|
-| **Rohith Ramakrishnappa** |
-| **Lexi Miller** |
-| **Raahem Ahmed** |
+- **Rohith Ramakrishnappa**
+- **Lexi Miller**
+- **Raahem Ahmed**
 
 Supervisor: Prof. Baidyanath Biswas, Trinity College Dublin.
-            
-Industry partner:Hannah Beckett, Manager , Technology Consulting
+
+Industry partner: Hannah Beckett, Manager, Technology Consulting, EY Ireland.
 
 
 ## References
