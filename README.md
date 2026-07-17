@@ -189,14 +189,15 @@ Every company is scored at an observation date, and its outcome is read from a 2
 
 ## Team
 
-| Member | Contribution |
-|---|---|
-| **Rohith Ramakrishnappa** | |
-| **Lexi Miller** | |
-| **Raahem Ahmed** | |
+| Member |
+|---|
+| **Rohith Ramakrishnappa** |
+| **Lexi Miller** |
+| **Raahem Ahmed** |
 
 Supervisor: Prof. Baidyanath Biswas, Trinity College Dublin.
-Industry partner: EY Ireland.
+            
+Industry partner:Hannah Beckett, Manager , Technology Consulting
 
 
 ## References
