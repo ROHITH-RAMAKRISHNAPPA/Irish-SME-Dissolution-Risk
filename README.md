@@ -5,7 +5,7 @@ An early-warning system that predicts Irish SME dissolution from public CRO fili
 
 ## Live Dashboard
 
-**[Launch the Dissolution Risk Dashboard](https://your-app-name.streamlit.app)** - hosted on Streamlit Community Cloud
+**[Launch the Dissolution Risk Dashboard](https://irish-sme-dis-solution-risk.streamlit.app/)** - hosted on Streamlit Community Cloud
 
 
 ## Project Report & Data
