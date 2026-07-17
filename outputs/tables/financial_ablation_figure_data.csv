@@ -1,0 +1,26 @@
+experiment,population,feature_set,n_features,model,avg_precision,auc_roc
+1,register-scale,Financials only,20,XGBoost,0.0577,0.573
+1,register-scale,Financials only,20,LightGBM,0.0595,0.5743
+1,register-scale,Financials only,20,Logistic Reg,0.0483,0.5624
+1,register-scale,Financials only,20,Random Forest,0.0574,0.5753
+1,register-scale,Financials only,20,Decision Tree,0.0509,0.5579
+1,register-scale,Full model,84,XGBoost,0.6333,0.9432
+1,register-scale,Full model,84,LightGBM,0.6273,0.9387
+1,register-scale,Full model,84,Logistic Reg,0.4755,0.9615
+1,register-scale,Full model,84,Random Forest,0.4068,0.873
+1,register-scale,Full model,84,Decision Tree,0.1789,0.784
+1,register-scale,No financials,64,XGBoost,0.611,0.9366
+1,register-scale,No financials,64,LightGBM,0.6054,0.9329
+1,register-scale,No financials,64,Logistic Reg,0.4585,0.9578
+1,register-scale,No financials,64,Random Forest,0.4042,0.8676
+1,register-scale,No financials,64,Decision Tree,0.1634,0.7744
+2,covered-subset,Financials only,20,XGBoost,0.118,0.7473
+2,covered-subset,Financials only,20,LightGBM,0.1298,0.7384
+2,covered-subset,Financials only,20,Logistic Reg,0.0616,0.7013
+2,covered-subset,Financials only,20,Random Forest,0.1185,0.7493
+2,covered-subset,Financials only,20,Decision Tree,0.0804,0.6888
+2,covered-subset,Full set,84,XGBoost,0.5147,0.9525
+2,covered-subset,Full set,84,LightGBM,0.4821,0.9448
+2,covered-subset,Full set,84,Logistic Reg,0.251,0.9325
+2,covered-subset,Full set,84,Random Forest,0.5099,0.9322
+2,covered-subset,Full set,84,Decision Tree,0.3008,0.8505

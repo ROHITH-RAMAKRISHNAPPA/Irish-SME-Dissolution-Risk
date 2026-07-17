@@ -1,0 +1,11 @@
+experiment,population,feature_set,n_features,model,avg_precision,auc_roc,n_train,n_test,train_base_rate,test_base_rate
+2,covered-subset,Financials only,20,XGBoost,0.118,0.7473,14616,21857,0.0555,0.0308
+2,covered-subset,Financials only,20,LightGBM,0.1298,0.7384,14616,21857,0.0555,0.0308
+2,covered-subset,Financials only,20,Logistic Reg,0.0616,0.7013,14616,21857,0.0555,0.0308
+2,covered-subset,Financials only,20,Random Forest,0.1185,0.7493,14616,21857,0.0555,0.0308
+2,covered-subset,Financials only,20,Decision Tree,0.0804,0.6888,14616,21857,0.0555,0.0308
+2,covered-subset,Full set,84,XGBoost,0.5147,0.9525,14616,21857,0.0555,0.0308
+2,covered-subset,Full set,84,LightGBM,0.4821,0.9448,14616,21857,0.0555,0.0308
+2,covered-subset,Full set,84,Logistic Reg,0.251,0.9325,14616,21857,0.0555,0.0308
+2,covered-subset,Full set,84,Random Forest,0.5099,0.9322,14616,21857,0.0555,0.0308
+2,covered-subset,Full set,84,Decision Tree,0.3008,0.8505,14616,21857,0.0555,0.0308

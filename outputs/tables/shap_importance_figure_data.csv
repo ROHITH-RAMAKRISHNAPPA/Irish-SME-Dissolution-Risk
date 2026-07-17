@@ -1,0 +1,16 @@
+feature,importance
+other_form_count,0.005
+director_change_count,0.0743
+name_risk_score,0.098
+days_since_last_name_change,0.1161
+name_change_count,0.1273
+office_change_count,0.1283
+age_vs_sector_median,0.1457
+days_since_last_office_change,0.1627
+total_submissions,0.1866
+sector_relative_deviation,0.1899
+company_age_years,0.191
+same_day_dissolution_count,0.1936
+submission_history_years,0.3429
+annual_submission_rate,0.3902
+ar_filed_count,0.4228

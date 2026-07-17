@@ -1,0 +1,4 @@
+partition,companies,dissolution_rate
+Train,98926,6.69%
+Test,94421,4.07%
+Prospective,28974,unlabelled at scoring

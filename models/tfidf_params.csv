@@ -1,0 +1,5 @@
+param,value
+analyzer,char_wb
+ngram_min,3
+ngram_max,5
+max_features,500

@@ -1,0 +1,6 @@
+,Financials only,Full set
+XGBoost,0.118,0.5147
+LightGBM,0.1298,0.4821
+Logistic Reg,0.0616,0.251
+Random Forest,0.1185,0.5099
+Decision Tree,0.0804,0.3008

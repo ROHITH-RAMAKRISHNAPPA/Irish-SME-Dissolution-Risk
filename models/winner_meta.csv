@@ -1,0 +1,11 @@
+key,value
+winner_name,XGBoost
+winner_thr,0.68
+avg_precision,0.6298
+auc_roc,0.9412
+f1,0.5933
+ks_stat,0.74
+brier_score,0.0272
+optuna_n_trials,100
+optuna_cv_folds,5
+scale_pos_weight,13.9367

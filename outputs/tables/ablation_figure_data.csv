@@ -1,0 +1,3 @@
+ablation,baseline_ap,ablated_ap,delta
+All 20 financial features removed,0.6333,0.611,0.0223
+annual_submission_rate removed,0.5636,0.5404,0.0232

@@ -1,0 +1,73 @@
+# ===========================================================================
+# Secrets. Nothing here ever reaches a remote.
+# ===========================================================================
+.env
+.env.*
+*.key
+.streamlit/secrets.toml
+
+# ===========================================================================
+# Environment and caches
+# ===========================================================================
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.DS_Store
+Thumbs.db
+
+# ===========================================================================
+# Raw data: 8.8 GB. cro_submissions_raw.jsonl alone is 8 GB, and
+# Company_Records.csv (183 MB) and cro_submissions_summary.csv (117 MB) are
+# each over GitHub's 100 MB hard limit, so they could not be pushed even if
+# that were wanted. All of it is public CRO data; the README says where it
+# comes from and the notebooks document the collection.
+# ===========================================================================
+data/raw/
+
+# ===========================================================================
+# Processed data. Block the directory, then re-admit the one file the
+# dashboard loads. Git cannot re-include a file whose parent directory is
+# excluded, which is why this is written as data/* rather than data/.
+#
+# train_set.csv (86 MB) and test_set.csv (83 MB) stay out: they exist to train
+# and evaluate, the model is already trained, and the notebooks rebuild them.
+# ===========================================================================
+data/*
+!data/processed/
+data/processed/*
+!data/processed/prospective_final.csv
+
+# ===========================================================================
+# Derived arrays the dashboard never opens
+# ===========================================================================
+# 85 MB of sentence embeddings, an input to topic modelling, which is cut.
+outputs/nlp/embeddings.npy
+# 81 MB narrative corpus. nlp_04's kept output is llm_features.csv.
+outputs/nlp/corpus.csv
+# Per-company SHAP matrix. The dashboard reads top_drivers_json from
+# prospective_shap.csv and computes live SHAP from the model itself.
+outputs/prospective_shap_values.npy
+
+# ===========================================================================
+# Models. The dashboard loads the winner named in winner_meta.csv plus the
+# calibrator. The four also-rans belong to the dissertation's comparison
+# table, not to the running app; random_forest_model.joblib alone is 39 MB.
+# ===========================================================================
+models/random_forest_model.joblib
+models/lightgbm_model.joblib
+models/decision_tree_model.joblib
+models/logistic_regression_model.joblib
+
+# ===========================================================================
+# Scratch
+# ===========================================================================
+app.py
+app_1.py
+app_hud.py
+build_deploy_bundle.py
+*.log
+*.tmp
+~$*

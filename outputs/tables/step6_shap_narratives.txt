@@ -1,0 +1,2891 @@
+EY DISSOLUTION RISK - PRIORITY AUDIT TRIGGERS
+Irish SME Dissolution Risk Model | XGBoost
+Total PRIORITY: 78 | Calibrated probabilities
+Base rate: 6.69% (training dissolution rate)
+
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 653915
+Company Name   : ALTITUDE AIRCRAFT CAL I LIMITED
+County         : Dublin
+Type           : LTD - Private Company Limited by Shares
+Age            : 5.4 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.9583  (95.8% estimated probability)
+  Behavioural Anomaly    : 0.9117
+  Combined Score         : 0.9350
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 14.3x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 9.4118  ->  ^ RISK  (|SHAP|=5.9188)
+  2. name_change_count = 1  ->  ^ RISK  (|SHAP|=2.4751)
+  3. submission_history_years = 6.8  ->  ^ RISK  (|SHAP|=2.0558)
+  4. charge_count = 16  ->  v risk  (|SHAP|=1.4824)
+  5. total_submissions = 64  ->  ^ RISK  (|SHAP|=1.4805)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 632240
+Company Name   : NILES MARITIME 3 DESIGNATED ACTIVITY COMPANY
+County         : Dublin
+Type           : DAC - Designated Activity Company (limited by shares)
+Age            : 6.4 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.9747  (97.5% estimated probability)
+  Behavioural Anomaly    : 0.8359
+  Combined Score         : 0.9053
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 14.6x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 5.4795  ->  ^ RISK  (|SHAP|=6.2959)
+  2. submission_history_years = 7.3  ->  ^ RISK  (|SHAP|=2.9184)
+  3. director_change_count = 9  ->  v risk  (|SHAP|=2.4232)
+  4. ar_filed_count = 15  ->  ^ RISK  (|SHAP|=1.8959)
+  5. name_change_count = 10  ->  v risk  (|SHAP|=1.1336)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 707700
+Company Name   : WAVE I FINANCE DESIGNATED ACTIVITY COMPANY
+County         : Dublin
+Type           : DAC - Designated Activity Company (limited by shares)
+Age            : 3.1 years
+
+RISK SCORES
+  Dissolution Risk Score : 1.0000  (100.0% estimated probability)
+  Behavioural Anomaly    : 0.8098
+  Combined Score         : 0.9049
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 14.9x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 5.2273  ->  ^ RISK  (|SHAP|=5.5824)
+  2. ar_filed_count = 8  ->  ^ RISK  (|SHAP|=4.9654)
+  3. guo_irish_company_count = 148  ->  ^ RISK  (|SHAP|=2.4605)
+  4. submission_history_years = 4.4  ->  ^ RISK  (|SHAP|=1.4904)
+  5. director_change_count = 6  ->  v risk  (|SHAP|=1.3701)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 597840
+Company Name   : GLENCAR INVESTMENTS IV DESIGNATED ACTIVITY COMPANY
+County         : Dublin
+Type           : DAC - Designated Activity Company (limited by shares)
+Age            : 7.9 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.9747  (97.5% estimated probability)
+  Behavioural Anomaly    : 0.8344
+  Combined Score         : 0.9045
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 14.6x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 6.3736  ->  ^ RISK  (|SHAP|=5.0459)
+  2. name_change_count = 1  ->  ^ RISK  (|SHAP|=2.5471)
+  3. guo_irish_company_count = 527  ->  ^ RISK  (|SHAP|=2.4711)
+  4. director_change_count = 17  ->  v risk  (|SHAP|=2.1184)
+  5. other_form_count = 13  ->  v risk  (|SHAP|=1.6506)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 701200
+Company Name   : GLENCAR NORDIC SECURED LENDING DESIGNATED ACTIVITY COMPANY
+County         : Dublin
+Type           : DAC - Designated Activity Company (limited by shares)
+Age            : 3.4 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.9674  (96.7% estimated probability)
+  Behavioural Anomaly    : 0.8155
+  Combined Score         : 0.8915
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 14.4x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 7.6087  ->  ^ RISK  (|SHAP|=5.8771)
+  2. ar_filed_count = 10  ->  ^ RISK  (|SHAP|=3.7656)
+  3. company_age_years = 3.41  ->  v risk  (|SHAP|=2.4253)
+  4. guo_irish_company_count = 527  ->  ^ RISK  (|SHAP|=1.9932)
+  5. director_change_count = 12  ->  v risk  (|SHAP|=1.8909)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 758835
+Company Name   : TAMARA CAPITAL UAE DESIGNATED ACTIVITY COMPANY
+County         : Dublin
+Type           : DAC - Designated Activity Company (limited by shares)
+Age            : 0.8 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.8788  (87.9% estimated probability)
+  Behavioural Anomaly    : 0.9013
+  Combined Score         : 0.8900
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 13.1x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. ar_filed_count = 5  ->  ^ RISK  (|SHAP|=7.7160)
+  2. annual_submission_rate = 7.5  ->  ^ RISK  (|SHAP|=4.9053)
+  3. company_age_years = 0.84  ->  v risk  (|SHAP|=3.8736)
+  4. total_submissions = 15  ->  v risk  (|SHAP|=2.5477)
+  5. submission_history_years = 2.0  ->  ^ RISK  (|SHAP|=1.8340)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 628624
+Company Name   : SKY VOYAGER AVIATION TRADING IV DESIGNATED ACTIVITY COMPANY
+County         : Dublin
+Type           : DAC - Designated Activity Company (limited by shares)
+Age            : 6.5 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.8566  (85.7% estimated probability)
+  Behavioural Anomaly    : 0.9135
+  Combined Score         : 0.8850
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 12.8x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 6.3636  ->  ^ RISK  (|SHAP|=5.1043)
+  2. submission_history_years = 7.7  ->  ^ RISK  (|SHAP|=2.0219)
+  3. outstanding_charge_count = 3  ->  v risk  (|SHAP|=1.9059)
+  4. guo_irish_company_count = 527  ->  ^ RISK  (|SHAP|=1.3905)
+  5. total_submissions = 49  ->  ^ RISK  (|SHAP|=1.2014)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 628625
+Company Name   : SKY VOYAGER AVIATION TRADING III DESIGNATED ACTIVITY COMPANY
+County         : Dublin
+Type           : DAC - Designated Activity Company (limited by shares)
+Age            : 6.5 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.8566  (85.7% estimated probability)
+  Behavioural Anomaly    : 0.9135
+  Combined Score         : 0.8850
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 12.8x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 6.3636  ->  ^ RISK  (|SHAP|=5.1817)
+  2. submission_history_years = 7.7  ->  ^ RISK  (|SHAP|=2.0255)
+  3. outstanding_charge_count = 3  ->  v risk  (|SHAP|=1.9090)
+  4. guo_irish_company_count = 527  ->  ^ RISK  (|SHAP|=1.4949)
+  5. charge_count = 9  ->  v risk  (|SHAP|=1.1844)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 730425
+Company Name   : WAVE III FINANCE DESIGNATED ACTIVITY COMPANY
+County         : Dublin
+Type           : DAC - Designated Activity Company (limited by shares)
+Age            : 2.1 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.9674  (96.7% estimated probability)
+  Behavioural Anomaly    : 0.7959
+  Combined Score         : 0.8817
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 14.4x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. ar_filed_count = 6  ->  ^ RISK  (|SHAP|=7.2057)
+  2. annual_submission_rate = 4.2424  ->  ^ RISK  (|SHAP|=3.9697)
+  3. total_submissions = 14  ->  v risk  (|SHAP|=2.3716)
+  4. director_change_count = 0  ->  ^ RISK  (|SHAP|=2.3217)
+  5. company_age_years = 2.09  ->  v risk  (|SHAP|=1.8189)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 723443
+Company Name   : GLENCAR INVESTMENTS 44 DESIGNATED ACTIVITY COMPANY
+County         : Dublin
+Type           : DAC - Designated Activity Company (limited by shares)
+Age            : 2.4 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.9674  (96.7% estimated probability)
+  Behavioural Anomaly    : 0.7737
+  Combined Score         : 0.8706
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 14.4x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. ar_filed_count = 7  ->  ^ RISK  (|SHAP|=5.6075)
+  2. annual_submission_rate = 5.7576  ->  ^ RISK  (|SHAP|=4.8419)
+  3. director_change_count = 5  ->  v risk  (|SHAP|=2.4634)
+  4. company_age_years = 2.43  ->  v risk  (|SHAP|=1.9669)
+  5. total_submissions = 19  ->  v risk  (|SHAP|=1.9591)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 626946
+Company Name   : GLENCAR INVESTMENTS VII DESIGNATED ACTIVITY COMPANY
+County         : Dublin
+Type           : DAC - Designated Activity Company (limited by shares)
+Age            : 6.6 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.9674  (96.7% estimated probability)
+  Behavioural Anomaly    : 0.7721
+  Combined Score         : 0.8698
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 14.4x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 5.8974  ->  ^ RISK  (|SHAP|=5.1848)
+  2. director_change_count = 19  ->  v risk  (|SHAP|=3.0888)
+  3. name_change_count = 1  ->  ^ RISK  (|SHAP|=2.5219)
+  4. submission_history_years = 7.8  ->  ^ RISK  (|SHAP|=1.8322)
+  5. ar_filed_count = 16  ->  ^ RISK  (|SHAP|=1.7253)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 695485
+Company Name   : AP REVOLVER FUND II  DESIGNATED ACTIVITY COMPANY
+County         : Dublin
+Type           : DAC - Designated Activity Company (limited by shares)
+Age            : 3.6 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.8566  (85.7% estimated probability)
+  Behavioural Anomaly    : 0.8447
+  Combined Score         : 0.8506
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 12.8x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 7.6596  ->  ^ RISK  (|SHAP|=5.7196)
+  2. company_age_years = 3.63  ->  v risk  (|SHAP|=3.8570)
+  3. guo_irish_company_count = 74  ->  ^ RISK  (|SHAP|=2.7079)
+  4. director_change_count = 7  ->  v risk  (|SHAP|=2.2138)
+  5. submission_history_years = 4.7  ->  ^ RISK  (|SHAP|=1.2054)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 631531
+Company Name   : DJINN ISSUER DESIGNATED ACTIVITY COMPANY
+County         : Dublin
+Type           : DAC - Designated Activity Company (limited by shares)
+Age            : 6.4 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.8566  (85.7% estimated probability)
+  Behavioural Anomaly    : 0.8388
+  Combined Score         : 0.8477
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 12.8x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 5.974  ->  ^ RISK  (|SHAP|=5.7690)
+  2. submission_history_years = 7.7  ->  ^ RISK  (|SHAP|=2.2452)
+  3. director_change_count = 9  ->  v risk  (|SHAP|=1.9979)
+  4. ar_filed_count = 17  ->  ^ RISK  (|SHAP|=1.8279)
+  5. days_since_last_name_change = 2051  ->  v risk  (|SHAP|=1.3177)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 492547
+Company Name   : VOYA ALTERNATIVE ASSET MANAGEMENT IRELAND LIMITED
+County         : Dublin
+Type           : LTD - Private Company Limited by Shares
+Age            : 14.1 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.9583  (95.8% estimated probability)
+  Behavioural Anomaly    : 0.7308
+  Combined Score         : 0.8445
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 14.3x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 5.1974  ->  ^ RISK  (|SHAP|=5.3791)
+  2. ar_filed_count = 35  ->  v risk  (|SHAP|=3.4225)
+  3. total_submissions = 79  ->  ^ RISK  (|SHAP|=2.5247)
+  4. director_change_count = 12  ->  v risk  (|SHAP|=2.3885)
+  5. submission_history_years = 15.2  ->  ^ RISK  (|SHAP|=2.1942)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 653301
+Company Name   : BLACKROCK SPECIAL SITUATIONS DESIGNATED ACTIVITY COMPANY
+County         : Dublin
+Type           : DAC - Designated Activity Company (limited by shares)
+Age            : 5.5 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.9674  (96.7% estimated probability)
+  Behavioural Anomaly    : 0.7176
+  Combined Score         : 0.8425
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 14.4x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 5.3623  ->  ^ RISK  (|SHAP|=5.1191)
+  2. guo_irish_company_count = 369  ->  ^ RISK  (|SHAP|=2.9434)
+  3. director_change_count = 9  ->  v risk  (|SHAP|=2.0330)
+  4. company_age_years = 5.48  ->  v risk  (|SHAP|=1.8375)
+  5. submission_history_years = 6.9  ->  ^ RISK  (|SHAP|=1.7159)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 616726
+Company Name   : GLENCAR INVESTMENTS XIX DESIGNATED ACTIVITY COMPANY
+County         : Dublin
+Type           : DAC - Designated Activity Company (limited by shares)
+Age            : 7.1 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.8788  (87.9% estimated probability)
+  Behavioural Anomaly    : 0.8016
+  Combined Score         : 0.8402
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 13.1x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 6.4634  ->  ^ RISK  (|SHAP|=4.6053)
+  2. director_change_count = 18  ->  v risk  (|SHAP|=2.6004)
+  3. guo_irish_company_count = 527  ->  ^ RISK  (|SHAP|=2.4274)
+  4. name_change_count = 1  ->  ^ RISK  (|SHAP|=2.1138)
+  5. submission_history_years = 8.2  ->  ^ RISK  (|SHAP|=1.7212)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 687081
+Company Name   : ROY AVIATION 379 DESIGNATED ACTIVITY COMPANY
+County         : Dublin
+Type           : DAC - Designated Activity Company (limited by shares)
+Age            : 3.9 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.8566  (85.7% estimated probability)
+  Behavioural Anomaly    : 0.8064
+  Combined Score         : 0.8315
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 12.8x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 6.9231  ->  ^ RISK  (|SHAP|=5.5423)
+  2. company_age_years = 3.91  ->  v risk  (|SHAP|=2.7409)
+  3. ar_filed_count = 13  ->  ^ RISK  (|SHAP|=2.1717)
+  4. submission_history_years = 5.2  ->  ^ RISK  (|SHAP|=1.6877)
+  5. director_change_count = 6  ->  v risk  (|SHAP|=1.6055)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 687074
+Company Name   : ROY AVIATION 60263 DESIGNATED ACTIVITY COMPANY
+County         : Dublin
+Type           : DAC - Designated Activity Company (limited by shares)
+Age            : 3.9 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.8566  (85.7% estimated probability)
+  Behavioural Anomaly    : 0.8043
+  Combined Score         : 0.8304
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 12.8x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 7.3077  ->  ^ RISK  (|SHAP|=5.3788)
+  2. company_age_years = 3.91  ->  v risk  (|SHAP|=2.6631)
+  3. ar_filed_count = 13  ->  ^ RISK  (|SHAP|=2.1748)
+  4. director_change_count = 8  ->  v risk  (|SHAP|=2.0935)
+  5. submission_history_years = 5.2  ->  ^ RISK  (|SHAP|=1.7265)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 687072
+Company Name   : ROY AVIATION 60264 DESIGNATED ACTIVITY COMPANY
+County         : Dublin
+Type           : DAC - Designated Activity Company (limited by shares)
+Age            : 3.9 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.8566  (85.7% estimated probability)
+  Behavioural Anomaly    : 0.8043
+  Combined Score         : 0.8304
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 12.8x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 7.3077  ->  ^ RISK  (|SHAP|=5.3788)
+  2. company_age_years = 3.91  ->  v risk  (|SHAP|=2.6631)
+  3. ar_filed_count = 13  ->  ^ RISK  (|SHAP|=2.1748)
+  4. director_change_count = 8  ->  v risk  (|SHAP|=2.0935)
+  5. submission_history_years = 5.2  ->  ^ RISK  (|SHAP|=1.7265)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 632239
+Company Name   : BARRY MARITIME 5 DESIGNATED ACTIVITY COMPANY
+County         : Dublin
+Type           : DAC - Designated Activity Company (limited by shares)
+Age            : 6.4 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.7231  (72.3% estimated probability)
+  Behavioural Anomaly    : 0.9353
+  Combined Score         : 0.8292
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 10.8x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 12.4658  ->  ^ RISK  (|SHAP|=5.5604)
+  2. submission_history_years = 7.3  ->  ^ RISK  (|SHAP|=2.4478)
+  3. outstanding_charge_count = 15  ->  v risk  (|SHAP|=2.3034)
+  4. total_submissions = 91  ->  ^ RISK  (|SHAP|=2.0678)
+  5. ar_filed_count = 15  ->  ^ RISK  (|SHAP|=1.9810)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 718713
+Company Name   : BPCI ORIGINATOR DESIGNATED ACTIVITY COMPANY
+County         : Dublin
+Type           : DAC - Designated Activity Company (limited by shares)
+Age            : 2.6 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.8566  (85.7% estimated probability)
+  Behavioural Anomaly    : 0.7979
+  Combined Score         : 0.8272
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 12.8x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 6.3333  ->  ^ RISK  (|SHAP|=6.1124)
+  2. ar_filed_count = 9  ->  ^ RISK  (|SHAP|=4.1848)
+  3. company_age_years = 2.65  ->  v risk  (|SHAP|=2.6785)
+  4. days_since_last_name_change = 963  ->  v risk  (|SHAP|=2.5532)
+  5. total_submissions = 19  ->  v risk  (|SHAP|=1.9133)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 325762
+Company Name   : BLACK DRAUGHT INVESTMENTS UNLIMITED COMPANY
+County         : Dublin
+Type           : ULC - Private Unlimited Company
+Age            : 24.7 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.8566  (85.7% estimated probability)
+  Behavioural Anomaly    : 0.7970
+  Combined Score         : 0.8268
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 12.8x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. ar_filed_count = 60  ->  v risk  (|SHAP|=5.7451)
+  2. annual_submission_rate = 8.6275  ->  ^ RISK  (|SHAP|=4.8447)
+  3. company_age_years = 24.73  ->  ^ RISK  (|SHAP|=4.4503)
+  4. director_change_count = 62  ->  v risk  (|SHAP|=3.7448)
+  5. total_submissions = 220  ->  ^ RISK  (|SHAP|=3.1461)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 638352
+Company Name   : ZEPPELIN ISSUER DESIGNATED ACTIVITY COMPANY
+County         : Dublin
+Type           : DAC - Designated Activity Company (limited by shares)
+Age            : 6.1 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.8788  (87.9% estimated probability)
+  Behavioural Anomaly    : 0.7582
+  Combined Score         : 0.8185
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 13.1x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 4.0541  ->  ^ RISK  (|SHAP|=3.8937)
+  2. submission_history_years = 7.4  ->  ^ RISK  (|SHAP|=2.7709)
+  3. director_change_count = 6  ->  v risk  (|SHAP|=1.4303)
+  4. name_change_count = 0  ->  v risk  (|SHAP|=0.9327)
+  5. company_age_years = 6.1  ->  v risk  (|SHAP|=0.8818)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 703443
+Company Name   : AURORA SME I DESIGNATED ACTIVITY COMPANY
+County         : Dublin
+Type           : DAC - Designated Activity Company (limited by shares)
+Age            : 3.3 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.8788  (87.9% estimated probability)
+  Behavioural Anomaly    : 0.7301
+  Combined Score         : 0.8044
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 13.1x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. ar_filed_count = 9  ->  ^ RISK  (|SHAP|=4.3181)
+  2. annual_submission_rate = 4.4681  ->  ^ RISK  (|SHAP|=3.9345)
+  3. guo_irish_company_count = 148  ->  ^ RISK  (|SHAP|=2.1539)
+  4. company_age_years = 3.31  ->  v risk  (|SHAP|=1.4021)
+  5. total_submissions = 21  ->  v risk  (|SHAP|=1.2949)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 628770
+Company Name   : KINNERTON RESIDENTIAL DEVELOPMENT II DESIGNATED ACTIVITY COMPANY
+County         : Dublin
+Type           : DAC - Designated Activity Company (limited by shares)
+Age            : 6.5 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.8566  (85.7% estimated probability)
+  Behavioural Anomaly    : 0.7432
+  Combined Score         : 0.7999
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 12.8x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 4.1096  ->  ^ RISK  (|SHAP|=4.3939)
+  2. submission_history_years = 7.3  ->  ^ RISK  (|SHAP|=3.1275)
+  3. ar_filed_count = 15  ->  ^ RISK  (|SHAP|=2.9326)
+  4. director_change_count = 8  ->  v risk  (|SHAP|=2.4510)
+  5. name_change_count = 0  ->  v risk  (|SHAP|=1.2931)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 740519
+Company Name   : SNAPDRAGON ISSUER  DESIGNATED ACTIVITY COMPANY
+County         : Dublin
+Type           : DAC - Designated Activity Company (limited by shares)
+Age            : 1.6 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.8566  (85.7% estimated probability)
+  Behavioural Anomaly    : 0.7432
+  Combined Score         : 0.7999
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 12.8x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 7.6667  ->  ^ RISK  (|SHAP|=6.2295)
+  2. ar_filed_count = 7  ->  ^ RISK  (|SHAP|=5.7838)
+  3. company_age_years = 1.65  ->  v risk  (|SHAP|=2.9023)
+  4. days_since_last_name_change = 183  ->  v risk  (|SHAP|=1.9600)
+  5. submission_history_years = 3.0  ->  ^ RISK  (|SHAP|=1.7636)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 606521
+Company Name   : AVOLON AEROSPACE (IRELAND) AOE 119 LIMITED
+County         : Dublin
+Type           : LTD - Private Company Limited by Shares
+Age            : 7.5 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.9674  (96.7% estimated probability)
+  Behavioural Anomaly    : 0.5945
+  Combined Score         : 0.7810
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 14.4x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 5.3012  ->  ^ RISK  (|SHAP|=5.4453)
+  2. submission_history_years = 8.3  ->  ^ RISK  (|SHAP|=2.4835)
+  3. director_change_count = 12  ->  v risk  (|SHAP|=2.3231)
+  4. total_submissions = 44  ->  ^ RISK  (|SHAP|=1.1928)
+  5. name_address_dissolution_count = 1  ->  ^ RISK  (|SHAP|=1.1093)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 731584
+Company Name   : FODIATORFUNDING DESIGNATED ACTIVITY COMPANY
+County         : Clare
+Type           : DAC - Designated Activity Company (limited by shares)
+Age            : 2.0 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.8566  (85.7% estimated probability)
+  Behavioural Anomaly    : 0.6984
+  Combined Score         : 0.7775
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 12.8x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 5.3846  ->  ^ RISK  (|SHAP|=6.6769)
+  2. ar_filed_count = 7  ->  ^ RISK  (|SHAP|=5.4486)
+  3. company_age_years = 2.05  ->  v risk  (|SHAP|=3.4830)
+  4. total_submissions = 14  ->  v risk  (|SHAP|=2.9654)
+  5. days_since_last_name_change = 263  ->  v risk  (|SHAP|=2.4729)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 657905
+Company Name   : BANNA RMBS DESIGNATED ACTIVITY COMPANY
+County         : Dublin
+Type           : DAC - Designated Activity Company (limited by shares)
+Age            : 5.3 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.7231  (72.3% estimated probability)
+  Behavioural Anomaly    : 0.8304
+  Combined Score         : 0.7768
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 10.8x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 5.0  ->  ^ RISK  (|SHAP|=5.1561)
+  2. ar_filed_count = 16  ->  ^ RISK  (|SHAP|=1.8534)
+  3. name_change_count = 0  ->  v risk  (|SHAP|=1.6245)
+  4. submission_history_years = 5.8  ->  ^ RISK  (|SHAP|=1.5395)
+  5. company_age_years = 5.26  ->  v risk  (|SHAP|=1.2267)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 596132
+Company Name   : OZ KALMIA DESIGNATED ACTIVITY COMPANY
+County         : Dublin
+Type           : DAC - Designated Activity Company (limited by shares)
+Age            : 8.0 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.8788  (87.9% estimated probability)
+  Behavioural Anomaly    : 0.6720
+  Combined Score         : 0.7754
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 13.1x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 6.1957  ->  ^ RISK  (|SHAP|=4.4403)
+  2. guo_irish_company_count = 82  ->  ^ RISK  (|SHAP|=3.4289)
+  3. director_change_count = 6  ->  v risk  (|SHAP|=1.4631)
+  4. charge_count = 8  ->  v risk  (|SHAP|=1.4347)
+  5. total_submissions = 57  ->  ^ RISK  (|SHAP|=1.4191)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 485884
+Company Name   : FORTRESS IRELAND LEASING LIMITED
+County         : Clare
+Type           : LTD - Private Company Limited by Shares
+Age            : 14.5 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.7231  (72.3% estimated probability)
+  Behavioural Anomaly    : 0.8255
+  Combined Score         : 0.7743
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 10.8x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 4.4  ->  ^ RISK  (|SHAP|=3.7631)
+  2. director_change_count = 15  ->  v risk  (|SHAP|=2.4010)
+  3. submission_history_years = 15.0  ->  ^ RISK  (|SHAP|=2.1738)
+  4. ar_filed_count = 32  ->  v risk  (|SHAP|=2.1696)
+  5. total_submissions = 66  ->  ^ RISK  (|SHAP|=1.9748)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 485949
+Company Name   : HARMONIC AIRCRAFT LEASING LIMITED
+County         : Clare
+Type           : LTD - Private Company Limited by Shares
+Age            : 14.5 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.7231  (72.3% estimated probability)
+  Behavioural Anomaly    : 0.8245
+  Combined Score         : 0.7738
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 10.8x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 4.2  ->  ^ RISK  (|SHAP|=3.8284)
+  2. director_change_count = 14  ->  v risk  (|SHAP|=2.8371)
+  3. company_age_years = 14.52  ->  ^ RISK  (|SHAP|=2.5814)
+  4. submission_history_years = 15.0  ->  ^ RISK  (|SHAP|=2.4131)
+  5. total_submissions = 63  ->  ^ RISK  (|SHAP|=1.9338)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 606522
+Company Name   : AVOLON AEROSPACE (IRELAND) AOE 122 LIMITED
+County         : Dublin
+Type           : LTD - Private Company Limited by Shares
+Age            : 7.5 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.9747  (97.5% estimated probability)
+  Behavioural Anomaly    : 0.5616
+  Combined Score         : 0.7681
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 14.6x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 4.9398  ->  ^ RISK  (|SHAP|=5.5195)
+  2. submission_history_years = 8.3  ->  ^ RISK  (|SHAP|=2.4618)
+  3. director_change_count = 12  ->  v risk  (|SHAP|=2.3475)
+  4. total_submissions = 41  ->  ^ RISK  (|SHAP|=1.2840)
+  5. name_address_dissolution_count = 1  ->  ^ RISK  (|SHAP|=0.8873)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 323129
+Company Name   : BLACK LIQUID INVESTMENTS (IRELAND) UNLIMITED COMPANY
+County         : Dublin
+Type           : ULC - Private Unlimited Company
+Age            : 24.8 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.8566  (85.7% estimated probability)
+  Behavioural Anomaly    : 0.6754
+  Combined Score         : 0.7660
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 12.8x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. ar_filed_count = 60  ->  v risk  (|SHAP|=5.8955)
+  2. annual_submission_rate = 6.6016  ->  ^ RISK  (|SHAP|=4.6389)
+  3. company_age_years = 24.8  ->  ^ RISK  (|SHAP|=4.5740)
+  4. director_change_count = 66  ->  v risk  (|SHAP|=3.8854)
+  5. total_submissions = 169  ->  ^ RISK  (|SHAP|=3.1820)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 606523
+Company Name   : AVOLON AEROSPACE (IRELAND) AOE 123 LIMITED
+County         : Dublin
+Type           : LTD - Private Company Limited by Shares
+Age            : 7.5 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.9674  (96.7% estimated probability)
+  Behavioural Anomaly    : 0.5602
+  Combined Score         : 0.7638
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 14.4x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 4.9398  ->  ^ RISK  (|SHAP|=5.1358)
+  2. director_change_count = 12  ->  v risk  (|SHAP|=2.5120)
+  3. submission_history_years = 8.3  ->  ^ RISK  (|SHAP|=2.4829)
+  4. total_submissions = 41  ->  ^ RISK  (|SHAP|=1.1545)
+  5. outstanding_charge_count = 2  ->  v risk  (|SHAP|=0.9067)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 666089
+Company Name   : GLENCAR INVESTMENTS 29 DESIGNATED ACTIVITY COMPANY
+County         : Dublin
+Type           : DAC - Designated Activity Company (limited by shares)
+Age            : 4.9 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.7231  (72.3% estimated probability)
+  Behavioural Anomaly    : 0.8021
+  Combined Score         : 0.7626
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 10.8x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 6.5574  ->  ^ RISK  (|SHAP|=5.2927)
+  2. director_change_count = 14  ->  v risk  (|SHAP|=3.3140)
+  3. company_age_years = 4.9  ->  v risk  (|SHAP|=1.9907)
+  4. total_submissions = 40  ->  ^ RISK  (|SHAP|=1.3694)
+  5. name_change_count = 3  ->  ^ RISK  (|SHAP|=1.2522)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 606525
+Company Name   : AVOLON AEROSPACE (IRELAND) AOE 125 LIMITED
+County         : Dublin
+Type           : LTD - Private Company Limited by Shares
+Age            : 7.5 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.9674  (96.7% estimated probability)
+  Behavioural Anomaly    : 0.5576
+  Combined Score         : 0.7625
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 14.4x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 5.0588  ->  ^ RISK  (|SHAP|=4.9331)
+  2. submission_history_years = 8.5  ->  ^ RISK  (|SHAP|=2.5450)
+  3. director_change_count = 12  ->  v risk  (|SHAP|=2.2807)
+  4. total_submissions = 43  ->  ^ RISK  (|SHAP|=1.2450)
+  5. name_change_count = 3  ->  ^ RISK  (|SHAP|=0.8288)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 608062
+Company Name   : AVOLON AEROSPACE (IRELAND) AOE 127 LIMITED
+County         : Dublin
+Type           : LTD - Private Company Limited by Shares
+Age            : 7.5 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.9747  (97.5% estimated probability)
+  Behavioural Anomaly    : 0.5477
+  Combined Score         : 0.7612
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 14.6x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 5.2941  ->  ^ RISK  (|SHAP|=6.0912)
+  2. submission_history_years = 8.5  ->  ^ RISK  (|SHAP|=2.7719)
+  3. director_change_count = 13  ->  v risk  (|SHAP|=2.4128)
+  4. total_submissions = 45  ->  ^ RISK  (|SHAP|=1.2178)
+  5. outstanding_charge_count = 2  ->  v risk  (|SHAP|=1.1067)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 723134
+Company Name   : MATCH SAILING LIMITED
+County         : Dublin
+Type           : LTD - Private Company Limited by Shares
+Age            : 2.4 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.9167  (91.7% estimated probability)
+  Behavioural Anomaly    : 0.5993
+  Combined Score         : 0.7580
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 13.7x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. ar_filed_count = 6  ->  ^ RISK  (|SHAP|=8.2350)
+  2. total_submissions = 15  ->  v risk  (|SHAP|=3.8928)
+  3. annual_submission_rate = 4.5455  ->  ^ RISK  (|SHAP|=2.9259)
+  4. company_age_years = 2.44  ->  v risk  (|SHAP|=1.8018)
+  5. director_change_count = 3  ->  v risk  (|SHAP|=1.0781)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 706147
+Company Name   : MIRAVAST ILS CREDIT OPPORTUNITIES II DESIGNATED ACTIVITY COMPANY
+County         : Dublin
+Type           : DAC - Designated Activity Company (limited by shares)
+Age            : 3.2 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.7209  (72.1% estimated probability)
+  Behavioural Anomaly    : 0.7925
+  Combined Score         : 0.7567
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 10.8x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 5.3333  ->  ^ RISK  (|SHAP|=5.9882)
+  2. ar_filed_count = 11  ->  ^ RISK  (|SHAP|=3.5798)
+  3. director_change_count = 9  ->  v risk  (|SHAP|=3.5788)
+  4. company_age_years = 3.21  ->  v risk  (|SHAP|=2.1920)
+  5. submission_history_years = 4.5  ->  ^ RISK  (|SHAP|=1.7543)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 697350
+Company Name   : RIVE ENGINE LEASING LIMITED
+County         : Dublin
+Type           : LTD - Private Company Limited by Shares
+Age            : 3.6 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.7209  (72.1% estimated probability)
+  Behavioural Anomaly    : 0.7914
+  Combined Score         : 0.7561
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 10.8x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 8.4444  ->  ^ RISK  (|SHAP|=6.4272)
+  2. ar_filed_count = 9  ->  ^ RISK  (|SHAP|=3.3880)
+  3. company_age_years = 3.58  ->  v risk  (|SHAP|=2.3808)
+  4. director_change_count = 10  ->  v risk  (|SHAP|=1.9213)
+  5. guo_irish_company_count = 148  ->  ^ RISK  (|SHAP|=1.9039)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 498684
+Company Name   : ILFC AIRCRAFT 32A-3116 LIMITED
+County         : Clare
+Type           : LTD - Private Company Limited by Shares
+Age            : 13.6 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.8859  (88.6% estimated probability)
+  Behavioural Anomaly    : 0.6104
+  Combined Score         : 0.7482
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 13.2x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 3.9041  ->  ^ RISK  (|SHAP|=3.6783)
+  2. company_age_years = 13.64  ->  ^ RISK  (|SHAP|=2.2664)
+  3. submission_history_years = 14.6  ->  ^ RISK  (|SHAP|=2.1254)
+  4. total_submissions = 57  ->  ^ RISK  (|SHAP|=1.6395)
+  5. director_change_count = 11  ->  v risk  (|SHAP|=1.3185)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 687948
+Company Name   : 450 AIRCRAFT LEASING MSN 60280 B787 DESIGNATED ACTIVITY COMPANY
+County         : Dublin
+Type           : DAC - Designated Activity Company (limited by shares)
+Age            : 3.9 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.5955  (59.6% estimated probability)
+  Behavioural Anomaly    : 0.8973
+  Combined Score         : 0.7464
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 8.9x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 7.8846  ->  ^ RISK  (|SHAP|=5.4472)
+  2. ar_filed_count = 12  ->  ^ RISK  (|SHAP|=2.6423)
+  3. company_age_years = 3.87  ->  v risk  (|SHAP|=2.2107)
+  4. outstanding_charge_count = 4  ->  v risk  (|SHAP|=1.9888)
+  5. director_change_count = 8  ->  v risk  (|SHAP|=1.6183)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 649131
+Company Name   : CONTRAIL FUNDING 1 LIMITED
+County         : Dublin
+Type           : LTD - Private Company Limited by Shares
+Age            : 5.7 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.7209  (72.1% estimated probability)
+  Behavioural Anomaly    : 0.7712
+  Combined Score         : 0.7460
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 10.8x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 6.1905  ->  ^ RISK  (|SHAP|=4.9844)
+  2. director_change_count = 15  ->  v risk  (|SHAP|=3.7376)
+  3. submission_history_years = 6.3  ->  ^ RISK  (|SHAP|=1.7611)
+  4. ar_filed_count = 15  ->  ^ RISK  (|SHAP|=1.5865)
+  5. company_age_years = 5.67  ->  v risk  (|SHAP|=1.2937)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 733234
+Company Name   : MAVERICK AVIATION TL II (B) LIMITED
+County         : Dublin
+Type           : LTD - Private Company Limited by Shares
+Age            : 1.9 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.5955  (59.6% estimated probability)
+  Behavioural Anomaly    : 0.8946
+  Combined Score         : 0.7450
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 8.9x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 11.2121  ->  ^ RISK  (|SHAP|=6.3662)
+  2. ar_filed_count = 7  ->  ^ RISK  (|SHAP|=4.8359)
+  3. company_age_years = 1.95  ->  v risk  (|SHAP|=2.7361)
+  4. outstanding_charge_count = 4  ->  v risk  (|SHAP|=2.1699)
+  5. director_change_count = 11  ->  v risk  (|SHAP|=1.7594)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 740454
+Company Name   : ONATE FINANCE NO. 4 DESIGNATED ACTIVITY COMPANY
+County         : Dublin
+Type           : DAC - Designated Activity Company (limited by shares)
+Age            : 1.7 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.9674  (96.7% estimated probability)
+  Behavioural Anomaly    : 0.5195
+  Combined Score         : 0.7435
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 14.4x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. ar_filed_count = 6  ->  ^ RISK  (|SHAP|=7.8882)
+  2. annual_submission_rate = 6.8  ->  ^ RISK  (|SHAP|=6.3057)
+  3. company_age_years = 1.66  ->  v risk  (|SHAP|=3.0596)
+  4. total_submissions = 17  ->  v risk  (|SHAP|=1.5552)
+  5. submission_history_years = 2.5  ->  ^ RISK  (|SHAP|=1.2862)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 719645
+Company Name   : BBAM EUROPEAN CLO V DESIGNATED ACTIVITY COMPANY
+County         : Dublin
+Type           : DAC - Designated Activity Company (limited by shares)
+Age            : 2.6 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.5955  (59.6% estimated probability)
+  Behavioural Anomaly    : 0.8836
+  Combined Score         : 0.7395
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 8.9x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 7.0968  ->  ^ RISK  (|SHAP|=5.3739)
+  2. ar_filed_count = 9  ->  ^ RISK  (|SHAP|=3.3666)
+  3. company_age_years = 2.61  ->  v risk  (|SHAP|=2.3086)
+  4. outstanding_charge_count = 4  ->  v risk  (|SHAP|=1.5638)
+  5. name_change_count = 0  ->  v risk  (|SHAP|=1.4456)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 711236
+Company Name   : GOLDENTREE LOAN MANAGEMENT EUR CLO 7 DESIGNATED ACTIVITY COMPANY
+County         : Dublin
+Type           : DAC - Designated Activity Company (limited by shares)
+Age            : 3.0 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.5955  (59.6% estimated probability)
+  Behavioural Anomaly    : 0.8836
+  Combined Score         : 0.7395
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 8.9x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. ar_filed_count = 7  ->  ^ RISK  (|SHAP|=6.5793)
+  2. annual_submission_rate = 7.381  ->  ^ RISK  (|SHAP|=5.7196)
+  3. outstanding_charge_count = 6  ->  v risk  (|SHAP|=2.1043)
+  4. director_change_count = 10  ->  v risk  (|SHAP|=1.8985)
+  5. company_age_years = 2.97  ->  v risk  (|SHAP|=1.5950)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 716460
+Company Name   : AXA LEVERAGED LOANS DESIGNATED ACTIVITY COMPANY
+County         : Dublin
+Type           : DAC - Designated Activity Company (limited by shares)
+Age            : 2.8 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.8788  (87.9% estimated probability)
+  Behavioural Anomaly    : 0.5962
+  Combined Score         : 0.7375
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 13.1x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 4.3902  ->  ^ RISK  (|SHAP|=3.2351)
+  2. company_age_years = 2.75  ->  v risk  (|SHAP|=2.0029)
+  3. name_change_count = 1  ->  ^ RISK  (|SHAP|=1.9170)
+  4. director_change_count = 0  ->  ^ RISK  (|SHAP|=1.5916)
+  5. total_submissions = 18  ->  v risk  (|SHAP|=1.5308)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 729497
+Company Name   : NOARD INVESTMENTS UNLIMITED COMPANY
+County         : Westmeath
+Type           : ULC - Private Unlimited Company
+Age            : 2.1 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.9747  (97.5% estimated probability)
+  Behavioural Anomaly    : 0.4670
+  Combined Score         : 0.7208
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 14.6x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. ar_filed_count = 5  ->  ^ RISK  (|SHAP|=7.8538)
+  2. total_submissions = 10  ->  v risk  (|SHAP|=3.8972)
+  3. director_change_count = 0  ->  ^ RISK  (|SHAP|=3.8937)
+  4. other_form_count = 2  ->  ^ RISK  (|SHAP|=1.8561)
+  5. company_age_years = 2.14  ->  v risk  (|SHAP|=1.5839)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 627276
+Company Name   : START IRELAND LEASING 1 LIMITED
+County         : Clare
+Type           : LTD - Private Company Limited by Shares
+Age            : 6.6 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.5955  (59.6% estimated probability)
+  Behavioural Anomaly    : 0.8427
+  Combined Score         : 0.7191
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 8.9x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 5.4667  ->  ^ RISK  (|SHAP|=5.3775)
+  2. submission_history_years = 7.5  ->  ^ RISK  (|SHAP|=2.9267)
+  3. guo_irish_company_count = 10  ->  v risk  (|SHAP|=1.9564)
+  4. total_submissions = 41  ->  ^ RISK  (|SHAP|=1.4634)
+  5. director_change_count = 7  ->  v risk  (|SHAP|=1.0718)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 637646
+Company Name   : GLADIUS FUNDING LIMITED
+County         : Clare
+Type           : LTD - Private Company Limited by Shares
+Age            : 6.1 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.8566  (85.7% estimated probability)
+  Behavioural Anomaly    : 0.5713
+  Combined Score         : 0.7139
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 12.8x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 3.9394  ->  ^ RISK  (|SHAP|=4.2141)
+  2. ar_filed_count = 15  ->  ^ RISK  (|SHAP|=2.8263)
+  3. submission_history_years = 6.6  ->  ^ RISK  (|SHAP|=2.2096)
+  4. director_change_count = 5  ->  v risk  (|SHAP|=1.7523)
+  5. days_since_last_name_change = 2239  ->  v risk  (|SHAP|=1.5388)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 723804
+Company Name   : TAI (I) - AERO EIGHT LIMITED
+County         : Dublin
+Type           : LTD - Private Company Limited by Shares
+Age            : 2.4 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.7209  (72.1% estimated probability)
+  Behavioural Anomaly    : 0.6992
+  Combined Score         : 0.7100
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 10.8x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. ar_filed_count = 7  ->  ^ RISK  (|SHAP|=5.4586)
+  2. annual_submission_rate = 4.8276  ->  ^ RISK  (|SHAP|=4.2377)
+  3. director_change_count = 0  ->  ^ RISK  (|SHAP|=2.8868)
+  4. total_submissions = 14  ->  v risk  (|SHAP|=2.6956)
+  5. company_age_years = 2.41  ->  v risk  (|SHAP|=2.3056)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 660455
+Company Name   : SOUND POINT STRATEGIC CAPITAL MASTER FUND DESIGNATED ACTIVITY COMPANY
+County         : Galway
+Type           : DAC - Designated Activity Company (limited by shares)
+Age            : 5.1 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.7209  (72.1% estimated probability)
+  Behavioural Anomaly    : 0.6860
+  Combined Score         : 0.7034
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 10.8x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 5.0  ->  ^ RISK  (|SHAP|=4.6529)
+  2. guo_irish_company_count = 429  ->  ^ RISK  (|SHAP|=2.8427)
+  3. company_age_years = 5.14  ->  v risk  (|SHAP|=1.7010)
+  4. submission_history_years = 6.0  ->  ^ RISK  (|SHAP|=1.1848)
+  5. county_enterprise_trend = -0.0264  ->  v risk  (|SHAP|=0.9875)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 765448
+Company Name   : TAAM GELATI AVIATION ONE DESIGNATED ACTIVITY COMPANY
+County         : Dublin
+Type           : DAC - Designated Activity Company (limited by shares)
+Age            : 0.6 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.8566  (85.7% estimated probability)
+  Behavioural Anomaly    : 0.5468
+  Combined Score         : 0.7017
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 12.8x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. ar_filed_count = 5  ->  ^ RISK  (|SHAP|=7.3695)
+  2. annual_submission_rate = 7.8947  ->  ^ RISK  (|SHAP|=5.5543)
+  3. company_age_years = 0.57  ->  v risk  (|SHAP|=4.2789)
+  4. total_submissions = 15  ->  v risk  (|SHAP|=2.7760)
+  5. other_form_count = 7  ->  v risk  (|SHAP|=1.7121)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 638771
+Company Name   : PAYONEER EUROPE LIMITED
+County         : Dublin
+Type           : LTD - Private Company Limited by Shares
+Age            : 6.1 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.7231  (72.3% estimated probability)
+  Behavioural Anomaly    : 0.6791
+  Combined Score         : 0.7011
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 10.8x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. director_change_count = 13  ->  v risk  (|SHAP|=5.3938)
+  2. annual_submission_rate = 4.3056  ->  ^ RISK  (|SHAP|=4.4156)
+  3. ar_filed_count = 14  ->  ^ RISK  (|SHAP|=3.9069)
+  4. submission_history_years = 7.2  ->  ^ RISK  (|SHAP|=2.9044)
+  5. guo_irish_company_count = 2  ->  v risk  (|SHAP|=0.9821)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 627707
+Company Name   : FREEZE ISSUER DESIGNATED ACTIVITY COMPANY
+County         : Dublin
+Type           : DAC - Designated Activity Company (limited by shares)
+Age            : 6.6 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.5955  (59.6% estimated probability)
+  Behavioural Anomaly    : 0.7992
+  Combined Score         : 0.6973
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 8.9x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 5.0  ->  ^ RISK  (|SHAP|=5.4583)
+  2. director_change_count = 10  ->  v risk  (|SHAP|=3.5749)
+  3. submission_history_years = 6.8  ->  ^ RISK  (|SHAP|=2.7791)
+  4. days_since_last_name_change = 1964  ->  v risk  (|SHAP|=1.7380)
+  5. guo_irish_company_count = 2  ->  v risk  (|SHAP|=1.0283)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 693187
+Company Name   : FAIRFIELD REF ECS II GEN INI DESIGNATED ACTIVITY COMPANY
+County         : Dublin
+Type           : DAC - Designated Activity Company (limited by shares)
+Age            : 3.7 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.8566  (85.7% estimated probability)
+  Behavioural Anomaly    : 0.5125
+  Combined Score         : 0.6845
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 12.8x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 6.4706  ->  ^ RISK  (|SHAP|=5.7223)
+  2. director_change_count = 12  ->  v risk  (|SHAP|=2.9755)
+  3. ar_filed_count = 12  ->  ^ RISK  (|SHAP|=2.8763)
+  4. company_age_years = 3.7  ->  v risk  (|SHAP|=2.1136)
+  5. name_change_count = 1  ->  ^ RISK  (|SHAP|=1.7138)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 639889
+Company Name   : WHAM ISSUER DESIGNATED ACTIVITY COMPANY
+County         : Dublin
+Type           : DAC - Designated Activity Company (limited by shares)
+Age            : 6.0 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.5955  (59.6% estimated probability)
+  Behavioural Anomaly    : 0.7657
+  Combined Score         : 0.6806
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 8.9x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 4.7297  ->  ^ RISK  (|SHAP|=4.8954)
+  2. submission_history_years = 7.4  ->  ^ RISK  (|SHAP|=2.7210)
+  3. director_change_count = 8  ->  v risk  (|SHAP|=2.2556)
+  4. ar_filed_count = 17  ->  ^ RISK  (|SHAP|=1.4614)
+  5. days_since_last_name_change = 1874  ->  v risk  (|SHAP|=1.3982)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 628907
+Company Name   : ZEPHYRUS CAPITAL AVIATION PARTNERS 1C LIMITED
+County         : Dublin
+Type           : LTD - Private Company Limited by Shares
+Age            : 6.5 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.8788  (87.9% estimated probability)
+  Behavioural Anomaly    : 0.4791
+  Combined Score         : 0.6789
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 13.1x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 8.6076  ->  ^ RISK  (|SHAP|=5.8509)
+  2. director_change_count = 24  ->  v risk  (|SHAP|=3.8487)
+  3. submission_history_years = 7.9  ->  ^ RISK  (|SHAP|=2.2409)
+  4. total_submissions = 68  ->  ^ RISK  (|SHAP|=2.1642)
+  5. company_age_years = 6.53  ->  v risk  (|SHAP|=1.4200)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 680055
+Company Name   : WALDEN DIGITAL IRELAND LIMITED
+County         : Dublin
+Type           : LTD - Private Company Limited by Shares
+Age            : 4.2 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.8566  (85.7% estimated probability)
+  Behavioural Anomaly    : 0.4834
+  Combined Score         : 0.6700
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 12.8x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. ar_filed_count = 10  ->  ^ RISK  (|SHAP|=4.6470)
+  2. annual_submission_rate = 4.6154  ->  ^ RISK  (|SHAP|=3.5909)
+  3. name_change_count = 6  ->  v risk  (|SHAP|=2.1151)
+  4. company_age_years = 4.19  ->  v risk  (|SHAP|=1.4524)
+  5. submission_history_years = 5.2  ->  ^ RISK  (|SHAP|=1.2575)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 662851
+Company Name   : ION PLATFORM FINANCE HOLDINGS LIMITED
+County         : Dublin
+Type           : LTD - Private Company Limited by Shares
+Age            : 5.0 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.7231  (72.3% estimated probability)
+  Behavioural Anomaly    : 0.6161
+  Combined Score         : 0.6696
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 10.8x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 5.625  ->  ^ RISK  (|SHAP|=5.6448)
+  2. submission_history_years = 6.4  ->  ^ RISK  (|SHAP|=2.1032)
+  3. company_age_years = 5.04  ->  v risk  (|SHAP|=2.0321)
+  4. director_change_count = 7  ->  v risk  (|SHAP|=1.6598)
+  5. total_submissions = 36  ->  ^ RISK  (|SHAP|=1.1792)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 430477
+Company Name   : APPLIED CONCEPTS LIMITED
+County         : Offaly
+Type           : LTD - Private Company Limited by Shares
+Age            : 18.1 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.8566  (85.7% estimated probability)
+  Behavioural Anomaly    : 0.4696
+  Combined Score         : 0.6631
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 12.8x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. company_age_years = 18.09  ->  ^ RISK  (|SHAP|=4.3866)
+  2. ar_filed_count = 40  ->  v risk  (|SHAP|=3.0044)
+  3. submission_history_years = 18.6  ->  ^ RISK  (|SHAP|=2.6500)
+  4. total_submissions = 64  ->  ^ RISK  (|SHAP|=2.2913)
+  5. other_form_count = 11  ->  v risk  (|SHAP|=1.9446)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 627147
+Company Name   : MIRELF VI EASTPOINT LIMITED
+County         : Dublin
+Type           : LTD - Private Company Limited by Shares
+Age            : 6.6 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.8566  (85.7% estimated probability)
+  Behavioural Anomaly    : 0.4681
+  Combined Score         : 0.6623
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 12.8x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 5.6338  ->  ^ RISK  (|SHAP|=6.4481)
+  2. submission_history_years = 7.1  ->  ^ RISK  (|SHAP|=3.0318)
+  3. director_change_count = 10  ->  v risk  (|SHAP|=2.3054)
+  4. total_submissions = 40  ->  ^ RISK  (|SHAP|=1.2073)
+  5. solvency_trend_3yr = -82.495  ->  ^ RISK  (|SHAP|=1.1111)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 508995
+Company Name   : PIZZA DOG LIMITED
+County         : Dublin
+Type           : LTD - Private Company Limited by Shares
+Age            : 12.9 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.8566  (85.7% estimated probability)
+  Behavioural Anomaly    : 0.4654
+  Combined Score         : 0.6610
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 12.8x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. company_age_years = 12.92  ->  ^ RISK  (|SHAP|=2.3237)
+  2. submission_history_years = 13.2  ->  ^ RISK  (|SHAP|=1.9097)
+  3. director_change_count = 5  ->  v risk  (|SHAP|=1.8435)
+  4. is_foreign_owned = 1  ->  ^ RISK  (|SHAP|=1.0221)
+  5. days_since_last_office_change = 1785  ->  v risk  (|SHAP|=0.9198)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 656383
+Company Name   : BARRE IP INVESTMENTS LIMITED
+County         : Dublin
+Type           : LTD - Private Company Limited by Shares
+Age            : 5.3 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.8566  (85.7% estimated probability)
+  Behavioural Anomaly    : 0.4632
+  Combined Score         : 0.6599
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 12.8x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 4.4615  ->  ^ RISK  (|SHAP|=3.9651)
+  2. office_change_count = 4  ->  v risk  (|SHAP|=2.3450)
+  3. name_change_count = 1  ->  ^ RISK  (|SHAP|=1.9233)
+  4. director_change_count = 5  ->  v risk  (|SHAP|=1.4293)
+  5. ar_filed_count = 15  ->  ^ RISK  (|SHAP|=1.3760)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 725261
+Company Name   : WNG II AIRCRAFT LEASING 16 LIMITED
+County         : Dublin
+Type           : LTD - Private Company Limited by Shares
+Age            : 2.3 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.5955  (59.6% estimated probability)
+  Behavioural Anomaly    : 0.7043
+  Combined Score         : 0.6499
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 8.9x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 7.2414  ->  ^ RISK  (|SHAP|=6.5291)
+  2. ar_filed_count = 6  ->  ^ RISK  (|SHAP|=6.3180)
+  3. director_change_count = 12  ->  v risk  (|SHAP|=4.8528)
+  4. company_age_years = 2.33  ->  v risk  (|SHAP|=2.2521)
+  5. other_form_count = 1  ->  ^ RISK  (|SHAP|=1.6017)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 630468
+Company Name   : AXA GLOBAL HEALTHCARE (EU) LIMITED
+County         : Dublin
+Type           : LTD - Private Company Limited by Shares
+Age            : 6.5 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.7231  (72.3% estimated probability)
+  Behavioural Anomaly    : 0.5676
+  Combined Score         : 0.6454
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 10.8x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. director_change_count = 14  ->  v risk  (|SHAP|=5.2873)
+  2. annual_submission_rate = 4.7143  ->  ^ RISK  (|SHAP|=5.0219)
+  3. submission_history_years = 7.0  ->  ^ RISK  (|SHAP|=2.9589)
+  4. ar_filed_count = 15  ->  ^ RISK  (|SHAP|=2.6810)
+  5. solvency_ratio = 42.197  ->  v risk  (|SHAP|=1.4267)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 474066
+Company Name   : HOMETHERM INSULATION LIMITED
+County         : Meath
+Type           : LTD - Private Company Limited by Shares
+Age            : 15.4 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.7231  (72.3% estimated probability)
+  Behavioural Anomaly    : 0.5534
+  Combined Score         : 0.6383
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 10.8x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. company_age_years = 15.39  ->  ^ RISK  (|SHAP|=2.9450)
+  2. ar_filed_count = 32  ->  v risk  (|SHAP|=2.7018)
+  3. total_submissions = 50  ->  ^ RISK  (|SHAP|=2.3310)
+  4. submission_history_years = 15.7  ->  ^ RISK  (|SHAP|=2.2812)
+  5. annual_submission_rate = 3.1847  ->  ^ RISK  (|SHAP|=1.5914)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 667579
+Company Name   : CHURCHILL MMSL III DESIGNATED ACTIVITY COMPANY
+County         : Dublin
+Type           : DAC - Designated Activity Company (limited by shares)
+Age            : 4.8 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.7209  (72.1% estimated probability)
+  Behavioural Anomaly    : 0.5425
+  Combined Score         : 0.6317
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 10.8x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 4.4643  ->  ^ RISK  (|SHAP|=3.2552)
+  2. name_change_count = 1  ->  ^ RISK  (|SHAP|=1.9269)
+  3. company_age_years = 4.83  ->  v risk  (|SHAP|=1.7574)
+  4. office_change_count = 2  ->  v risk  (|SHAP|=1.4347)
+  5. other_form_count = 2  ->  ^ RISK  (|SHAP|=1.3772)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 707723
+Company Name   : TOBERNALT HOLDINGS  LIMITED
+County         : Dublin
+Type           : LTD - Private Company Limited by Shares
+Age            : 3.1 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.7231  (72.3% estimated probability)
+  Behavioural Anomaly    : 0.4662
+  Combined Score         : 0.5947
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 10.8x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. ar_filed_count = 7  ->  ^ RISK  (|SHAP|=6.8008)
+  2. annual_submission_rate = 6.0976  ->  ^ RISK  (|SHAP|=5.1888)
+  3. outstanding_charge_count = 5  ->  v risk  (|SHAP|=2.3989)
+  4. company_age_years = 3.14  ->  v risk  (|SHAP|=1.6903)
+  5. director_change_count = 5  ->  v risk  (|SHAP|=1.1368)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 459439
+Company Name   : MULLALLY'S BAR LIMITED
+County         : Dublin
+Type           : LTD - Private Company Limited by Shares
+Age            : 16.5 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.7231  (72.3% estimated probability)
+  Behavioural Anomaly    : 0.4532
+  Combined Score         : 0.5882
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 10.8x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. ar_filed_count = 33  ->  v risk  (|SHAP|=2.5161)
+  2. company_age_years = 16.5  ->  ^ RISK  (|SHAP|=2.4226)
+  3. submission_history_years = 17.8  ->  ^ RISK  (|SHAP|=2.2482)
+  4. total_submissions = 50  ->  ^ RISK  (|SHAP|=2.2438)
+  5. is_foreign_owned = 1  ->  ^ RISK  (|SHAP|=1.3326)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 737370
+Company Name   : HELLMANN WORLDWIDE LOGISTICS  LIMITED
+County         : Dublin
+Type           : LTD - Private Company Limited by Shares
+Age            : 1.8 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.5955  (59.6% estimated probability)
+  Behavioural Anomaly    : 0.5797
+  Combined Score         : 0.5876
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 8.9x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. ar_filed_count = 5  ->  ^ RISK  (|SHAP|=8.5362)
+  2. total_submissions = 13  ->  v risk  (|SHAP|=5.1944)
+  3. annual_submission_rate = 4.6429  ->  ^ RISK  (|SHAP|=2.9068)
+  4. company_age_years = 1.77  ->  v risk  (|SHAP|=2.5426)
+  5. name_change_count = 2  ->  v risk  (|SHAP|=1.9075)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 662982
+Company Name   : ION PLATFORM FINANCE GROUP LIMITED
+County         : Dublin
+Type           : LTD - Private Company Limited by Shares
+Age            : 5.0 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.5955  (59.6% estimated probability)
+  Behavioural Anomaly    : 0.5452
+  Combined Score         : 0.5703
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 8.9x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 5.8621  ->  ^ RISK  (|SHAP|=5.6732)
+  2. director_change_count = 9  ->  v risk  (|SHAP|=2.3335)
+  3. company_age_years = 5.04  ->  v risk  (|SHAP|=2.1844)
+  4. submission_history_years = 5.8  ->  ^ RISK  (|SHAP|=1.7733)
+  5. guo_irish_company_count = 48  ->  v risk  (|SHAP|=1.2395)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 653415
+Company Name   : ALPHA IRELAND LEASING MSN 1149 LIMITED
+County         : Clare
+Type           : LTD - Private Company Limited by Shares
+Age            : 5.5 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.5955  (59.6% estimated probability)
+  Behavioural Anomaly    : 0.4954
+  Combined Score         : 0.5454
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 8.9x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 5.8065  ->  ^ RISK  (|SHAP|=5.6952)
+  2. director_change_count = 15  ->  v risk  (|SHAP|=3.6370)
+  3. guo_irish_company_count = 3  ->  v risk  (|SHAP|=2.0880)
+  4. submission_history_years = 6.2  ->  ^ RISK  (|SHAP|=2.0484)
+  5. ar_filed_count = 14  ->  ^ RISK  (|SHAP|=1.5193)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 709408
+Company Name   : MULMUF ENGINEERING LIMITED
+County         : Sligo
+Type           : LTD - Private Company Limited by Shares
+Age            : 3.1 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.5955  (59.6% estimated probability)
+  Behavioural Anomaly    : 0.4829
+  Combined Score         : 0.5392
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 8.9x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 4.8837  ->  ^ RISK  (|SHAP|=4.9100)
+  2. ar_filed_count = 9  ->  ^ RISK  (|SHAP|=4.6807)
+  3. company_age_years = 3.07  ->  v risk  (|SHAP|=2.3567)
+  4. submission_history_years = 4.3  ->  ^ RISK  (|SHAP|=1.6142)
+  5. days_since_last_name_change = 1044  ->  v risk  (|SHAP|=1.0846)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 647673
+Company Name   : STANRAK LIMITED
+County         : Dublin
+Type           : LTD - Private Company Limited by Shares
+Age            : 5.7 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.5955  (59.6% estimated probability)
+  Behavioural Anomaly    : 0.4687
+  Combined Score         : 0.5321
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 8.9x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. annual_submission_rate = 4.2857  ->  ^ RISK  (|SHAP|=3.9523)
+  2. submission_history_years = 7.0  ->  ^ RISK  (|SHAP|=2.7308)
+  3. other_form_count = 7  ->  v risk  (|SHAP|=1.5070)
+  4. director_change_count = 5  ->  v risk  (|SHAP|=1.4956)
+  5. ar_filed_count = 18  ->  ^ RISK  (|SHAP|=1.1404)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================
+========================================================================
+========================================================================
+PRIORITY COMPANY - EY DISSOLUTION RISK NARRATIVE
+========================================================================
+Company Number : 567857
+Company Name   : SUPERIOR RACKING AND SHELVING LIMITED
+County         : Meath
+Type           : LTD - Private Company Limited by Shares
+Age            : 9.3 years
+
+RISK SCORES
+  Dissolution Risk Score : 0.5955  (59.6% estimated probability)
+  Behavioural Anomaly    : 0.4658
+  Combined Score         : 0.5306
+  Population Base Rate   : 6.69%  (training set dissolution rate)
+  Relative Risk          : 8.9x above base rate
+
+RECOMMENDED ACTION: IMMEDIATE AUDIT TRIGGER - escalate to engagement partner within 48 hours
+
+KEY RISK DRIVERS (top 5 by model contribution):
+  1. name_change_count = 1  ->  ^ RISK  (|SHAP|=3.4624)
+  2. director_change_count = 0  ->  ^ RISK  (|SHAP|=1.7861)
+  3. annual_submission_rate = 2.4272  ->  v risk  (|SHAP|=1.5063)
+  4. submission_history_years = 10.3  ->  ^ RISK  (|SHAP|=1.3978)
+  5. other_form_count = 2  ->  ^ RISK  (|SHAP|=1.3586)
+
+SUGGESTED AUDIT STEPS:
+  1. Verify current director details and registered address on CRO website (services.cro.ie)
+  2. Request most recent 3 years of management accounts from company
+  3. Check for outstanding Revenue Commissioners or CRO compliance notices
+  4. Contact registered address to confirm the company is still actively trading
+  5. Review director network for cross-directorships with other distressed entities
+
+NOTE: SHAP values explain raw model log-odds. Dissolution risk score is
+isotonic-calibrated. sigmoid(base + SHAP_sum) approximates but does not
+exactly equal the reported score (by design).
+========================================================================

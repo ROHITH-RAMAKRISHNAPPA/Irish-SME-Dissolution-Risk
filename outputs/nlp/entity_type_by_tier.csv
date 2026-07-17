@@ -1,0 +1,5 @@
+combined_risk_tier,holding_company,special_purpose_vehicle,trading_business,uncertain,n,pct_spv,pct_uncertain
+BEHAVIORAL_ANOMALY,194,647,448,289,1578,41.0,18.3
+DISSOLUTION_RISK,478,328,2517,2510,5833,5.6,43.0
+LOW_CONCERN,1458,309,12695,7023,21485,1.4,32.7
+PRIORITY,5,59,8,6,78,75.6,7.7

@@ -1,0 +1,16 @@
+experiment,population,feature_set,n_features,model,avg_precision,auc_roc,n_train,n_test,train_base_rate,test_base_rate
+1,register-scale,Financials only,20,XGBoost,0.0577,0.573,98926,94421,0.0669,0.0407
+1,register-scale,Financials only,20,LightGBM,0.0595,0.5743,98926,94421,0.0669,0.0407
+1,register-scale,Financials only,20,Logistic Reg,0.0483,0.5624,98926,94421,0.0669,0.0407
+1,register-scale,Financials only,20,Random Forest,0.0574,0.5753,98926,94421,0.0669,0.0407
+1,register-scale,Financials only,20,Decision Tree,0.0509,0.5579,98926,94421,0.0669,0.0407
+1,register-scale,Full model,84,XGBoost,0.6333,0.9432,98926,94421,0.0669,0.0407
+1,register-scale,Full model,84,LightGBM,0.6273,0.9387,98926,94421,0.0669,0.0407
+1,register-scale,Full model,84,Logistic Reg,0.4755,0.9615,98926,94421,0.0669,0.0407
+1,register-scale,Full model,84,Random Forest,0.4068,0.873,98926,94421,0.0669,0.0407
+1,register-scale,Full model,84,Decision Tree,0.1789,0.784,98926,94421,0.0669,0.0407
+1,register-scale,No financials,64,XGBoost,0.611,0.9366,98926,94421,0.0669,0.0407
+1,register-scale,No financials,64,LightGBM,0.6054,0.9329,98926,94421,0.0669,0.0407
+1,register-scale,No financials,64,Logistic Reg,0.4585,0.9578,98926,94421,0.0669,0.0407
+1,register-scale,No financials,64,Random Forest,0.4042,0.8676,98926,94421,0.0669,0.0407
+1,register-scale,No financials,64,Decision Tree,0.1634,0.7744,98926,94421,0.0669,0.0407

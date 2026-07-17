@@ -1,0 +1,4 @@
+experiment,features,baseline_ap,ablated_ap,delta_ap
+All 20 financial features removed,84 -> 64,0.6333,0.611,0.0223
+annual_submission_rate removed,84 -> 83,0.5636,0.5404,0.0232
+Reduced to top 15 features,84 -> 15,0.5636,0.5032,0.0604

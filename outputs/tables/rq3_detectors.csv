@@ -1,0 +1,3 @@
+detector,permutation_auc,null_95th,result
+Isolation Forest,0.5297,0.508,passes
+Local Outlier Factor,0.4709,0.508,fails

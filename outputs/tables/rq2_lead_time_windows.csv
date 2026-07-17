@@ -1,0 +1,8 @@
+cohort,dissolution_date_source,window_months,n_companies,n_flagged,flagged_share,binomial_p,median_lead_months,max_lead_months
+test and prospective combined,company records and register,6,3678,1479,0.40212071778140296,0.0,14.6,31.8
+test and prospective combined,company records and register,12,3222,1142,0.3544382371198014,0.0,17.1,31.8
+test and prospective combined,company records and register,18,2100,491,0.2338095238095238,5.463747418384046e-181,20.4,31.8
+test and prospective combined,company records and register,24,923,82,0.08884073672806067,5.807901368734743e-07,25.5,31.8
+prospective only,company records and register,6,478,328,0.6861924686192469,4.697196176643712e-303,11.9,16.5
+prospective only,company records and register,12,238,157,0.6596638655462185,9.205352557119025e-142,13.5,16.5
+prospective only,register only,6,37,28,0.7567567567567568,2.969211547001648e-29,7.3,8.0

@@ -1,0 +1,3 @@
+detector,observed_auc,null_95th,p_value,passes,n_permutations
+Isolation Forest,0.5297107652848325,0.5079853501594543,0.0,True,1000
+Local Outlier Factor,0.4708650446091027,0.5075386070381341,1.0,False,1000

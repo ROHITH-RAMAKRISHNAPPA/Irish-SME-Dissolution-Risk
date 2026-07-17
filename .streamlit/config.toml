@@ -1,0 +1,21 @@
+# Theme for Streamlit Community Cloud. Without this the deployed app renders in
+# the default light theme and every colour the dashboard sets assumes a dark
+# background. Community Cloud reads only the config.toml at the repository
+# root, so this file must stay at .streamlit/config.toml and nowhere else.
+
+[theme]
+base = "dark"
+primaryColor = "#FFE600"
+backgroundColor = "#1A1A23"
+secondaryBackgroundColor = "#2E2E38"
+textColor = "#FFFFFF"
+font = "sans serif"
+
+[server]
+# The client-list uploader takes a CRO number per line; a few hundred KB is
+# generous. The default 200 MB invites someone to upload something that will
+# not fit in the container's memory.
+maxUploadSize = 5
+
+[browser]
+gatherUsageStats = false

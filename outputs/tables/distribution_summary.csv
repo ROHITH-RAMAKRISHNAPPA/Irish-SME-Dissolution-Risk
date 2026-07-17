@@ -1,0 +1,7 @@
+feature,mean,median,skew
+ar_filed_count,28.794,24.0,0.6
+total_submissions,41.168,34.0,2.07
+director_change_count,4.323,2.0,7.76
+same_day_reg_count,90.859,84.0,0.77
+roaa,0.056,0.025,-0.77
+ebit_margin,18.697,6.289,1.01

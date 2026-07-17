@@ -1,0 +1,3 @@
+detector,auc,passes
+Isolation Forest,0.5297,True
+Local Outlier Factor,0.4709,False

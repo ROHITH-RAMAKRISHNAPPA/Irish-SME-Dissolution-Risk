@@ -1,0 +1,4 @@
+param,value
+max_depth,19
+min_samples_leaf,30
+min_samples_split,61

@@ -1,0 +1,7 @@
+key,value
+observed_auc,0.5297107652848325
+p_value,0.0
+passes,True
+null_mean,0.49971803903353257
+null_95th,0.5079853501594543
+n_permutations,1000

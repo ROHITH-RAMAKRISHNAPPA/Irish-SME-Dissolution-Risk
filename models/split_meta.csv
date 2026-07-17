@@ -1,0 +1,11 @@
+key,value
+n_train,98926
+n_test,94421
+n_prospective,28974
+n_train_positive,6623
+n_train_negative,92303
+scale_pos_weight,13.9367
+train_positive_rate,0.0669
+test_positive_rate,0.0407
+proxy_cutoff_date,2022-12-31
+compound_feature_note,name_address_dissolution_count = companies sharing name_token AND address - eliminates surname noise

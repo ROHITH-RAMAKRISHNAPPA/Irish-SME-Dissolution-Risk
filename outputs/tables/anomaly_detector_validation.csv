@@ -1,0 +1,3 @@
+detector,auc,null_95th,clears_null
+Isolation Forest,0.5297107652848325,0.5079853501594543,True
+Local Outlier Factor,0.4708650446091027,0.5075386070381341,False

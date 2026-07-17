@@ -1,0 +1,8 @@
+metric,value
+Average precision,0.6298
+AUC,0.9412
+F1,0.5933
+Precision,0.6599
+Recall,0.5389
+KS,0.74
+Brier,0.0272

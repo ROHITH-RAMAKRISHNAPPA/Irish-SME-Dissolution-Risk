@@ -1,0 +1,43 @@
+# Irish SME Dissolution Risk Model
+#
+# Written by hand rather than pip freeze: the development environment carries
+# jupyter, notebook tooling and transitive dependencies the application never
+# imports, and a deployment that installs jupyter to serve a dashboard will
+# time out on Streamlit Community Cloud.
+#
+# Upper bounds are set to the next major version so a clone resolves to the
+# same behaviour without pinning patch releases.
+
+# --- dashboard -------------------------------------------------------------
+streamlit>=1.31,<2
+pandas>=2.0,<3
+numpy>=1.24,<2
+plotly>=5.18,<6
+joblib>=1.3,<2
+
+# --- model -----------------------------------------------------------------
+scikit-learn>=1.3,<2
+xgboost>=2.0,<3
+shap>=0.44,<1
+
+# --- reports and exports ---------------------------------------------------
+reportlab>=4.0,<5
+matplotlib>=3.7,<4
+
+# --- language-model layer --------------------------------------------------
+# Optional at runtime. Without OPENAI_API_KEY the dashboard shows the saved
+# narratives and hides live generation.
+openai>=1.10,<2
+
+# ---------------------------------------------------------------------------
+# Pipeline only. Not imported by the dashboard. Uncomment to reproduce the
+# notebooks; left commented so a deployment does not build LightGBM, Optuna
+# and BERTopic in order to render a page.
+# ---------------------------------------------------------------------------
+# lightgbm>=4.1,<5
+# optuna>=3.5,<4
+# openpyxl>=3.1,<4
+# requests>=2.31,<3
+# scipy>=1.11,<2
+# statsmodels>=0.14,<1
+# python-docx>=1.1,<2

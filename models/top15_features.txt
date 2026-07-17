@@ -1,0 +1,15 @@
+ar_filed_count
+company_age_years
+annual_submission_rate
+total_submissions
+director_change_count
+submission_history_years
+other_form_count
+age_vs_sector_median
+days_since_last_name_change
+name_change_count
+days_since_last_office_change
+name_risk_score
+sector_relative_deviation
+office_change_count
+same_day_dissolution_count
