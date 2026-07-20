@@ -1558,6 +1558,192 @@ def render_sector_benchmark(row):
 
 
 # =============================================================================
+# FINDINGS
+# =============================================================================
+@st.cache_data(show_spinner=False)
+def load_ablation() -> Optional[pd.DataFrame]:
+    """The financial-value ablation at register scale. Index is the model, the
+    three columns are the conditions."""
+    path = TABLES / "ablation_financial_experiment1_wide.csv"
+    if not path.exists():
+        return None
+    try:
+        return pd.read_csv(path, index_col=0)
+    except Exception:
+        return None
+
+
+@st.cache_data(show_spinner=False)
+def load_triage_gains() -> Optional[pd.DataFrame]:
+    path = TABLES / "triage_gains.csv"
+    if not path.exists():
+        return None
+    try:
+        return pd.read_csv(path)
+    except Exception:
+        return None
+
+
+@st.cache_data(show_spinner=False)
+def load_lead_time() -> Optional[pd.DataFrame]:
+    """RQ2's lead-time windows, filtered to the answering cohort.
+
+    The file holds three arms. Two are robustness checks on the prospective
+    partition alone, one of them on 37 companies, and that arm reports a 75.7%
+    flag rate that is not the study's answer and must never be shown as one. The
+    question is answered on the combined test and prospective cohort against
+    company records and the register, so that is the only arm read here.
+    """
+    path = TABLES / "rq2_lead_time_windows.csv"
+    if not path.exists():
+        return None
+    try:
+        df = pd.read_csv(path)
+        if "cohort" in df.columns:
+            df = df[df["cohort"].astype(str).str.strip()
+                    == "test and prospective combined"]
+        if "dissolution_date_source" in df.columns:
+            df = df[df["dissolution_date_source"].astype(str).str.strip()
+                    == "company records and register"]
+        return df.sort_values("window_months") if len(df) else None
+    except Exception:
+        return None
+
+
+def render_findings_tab():
+    st.caption("The four results the study rests on, drawn from the tables the "
+               "pipeline wrote. Every figure here is the same one reported in the "
+               "write-up.")
+
+    # ---- 1. the thesis ----------------------------------------------------
+    st.markdown("##### Filing behaviour against financial ratios")
+    abl = load_ablation()
+    if abl is None or abl.empty:
+        st.info("ablation_financial_experiment1_wide.csv is not available.")
+    else:
+        cond_colour = {"Financials only": "#6B6B7B", "Full model": UI_YELLOW,
+                       "No financials": "#4EA8DE"}
+        fig = go.Figure()
+        for cond in [c for c in ("Financials only", "Full model", "No financials")
+                     if c in abl.columns]:
+            fig.add_trace(go.Bar(
+                name=cond, y=list(abl.index), x=abl[cond], orientation="h",
+                marker_color=cond_colour.get(cond, UI_MID),
+                text=[f"{v:.4f}" for v in abl[cond]], textposition="outside",
+                cliponaxis=False,
+                hovertemplate="%{y}, " + cond + ": %{x:.4f}<extra></extra>"))
+        plotly_dark(fig, height=430, barmode="group",
+                    margin=dict(t=52, b=44, l=130, r=80),
+                    legend=dict(orientation="h", y=1.12, x=0),
+                    xaxis_title="Average precision")
+        fig.update_yaxes(autorange="reversed")
+        st.plotly_chart(fig, use_container_width=True)
+
+        if "XGBoost" in abl.index and {"Full model", "No financials",
+                                       "Financials only"} <= set(abl.columns):
+            _full = float(abl.loc["XGBoost", "Full model"])
+            _none = float(abl.loc["XGBoost", "No financials"])
+            _fin = float(abl.loc["XGBoost", "Financials only"])
+            _lo = float(abl["Financials only"].min())
+            _hi = float(abl["Financials only"].max())
+            st.caption(
+                f"Dropping all twenty financial features moves the winning model "
+                f"from {_full:.4f} to {_none:.4f}, a relative reduction of "
+                f"{100 * (_full - _none) / _full:.1f}%. Built on financial ratios "
+                f"alone, every one of the {len(abl)} algorithms lands between "
+                f"{_lo:.4f} and {_hi:.4f}, barely above the base rate. The pattern "
+                f"holds across all of them, so it is a property of the data rather "
+                f"than of the choice of model.")
+
+    st.markdown("---")
+    left, right = st.columns(2)
+
+    # ---- 2. what the ranking is worth -------------------------------------
+    with left:
+        st.markdown("##### What reviewing the top of the list is worth")
+        tg = load_triage_gains()
+        if tg is None or tg.empty:
+            st.info("triage_gains.csv is not available.")
+        else:
+            x = [0] + list(tg["portfolio_share"]) + [1]
+            y = [0] + list(tg["dissolutions_captured"]) + [1]
+            fig = go.Figure()
+            fig.add_trace(go.Scatter(
+                x=[0, 1], y=[0, 1], mode="lines", name="Reviewing at random",
+                line=dict(color=UI_MID, dash="dash", width=1.6),
+                hoverinfo="skip"))
+            fig.add_trace(go.Scatter(
+                x=x, y=y, mode="lines+markers", name="Reviewing by score",
+                line=dict(color=UI_YELLOW, width=2.4),
+                marker=dict(size=8, color=UI_YELLOW),
+                hovertemplate="Review %{x:.0%} of the population<br>"
+                              "catch %{y:.1%} of dissolutions<extra></extra>"))
+            for _, r in tg.iterrows():
+                fig.add_annotation(
+                    x=r["portfolio_share"], y=r["dissolutions_captured"],
+                    text=f"<b>{r['dissolutions_captured']:.1%}</b> "
+                         f"<span style='color:{UI_TEXT_DIM}'>"
+                         f"{r['lift_over_random']:.1f}x</span>",
+                    showarrow=False, yshift=18, xshift=26,
+                    font=dict(family="IBM Plex Mono, monospace", size=11,
+                              color="#FFFFFF"))
+            plotly_dark(fig, height=360,
+                        margin=dict(t=46, b=44, l=56, r=26),
+                        legend=dict(orientation="h", y=1.14, x=0),
+                        xaxis_title="Share of the population reviewed",
+                        yaxis_title="Share of dissolutions caught",
+                        xaxis=dict(tickformat=".0%", range=[0, 1.02]),
+                        yaxis=dict(tickformat=".0%", range=[0, 1.02]))
+            st.plotly_chart(fig, use_container_width=True)
+            _r10 = tg[tg["portfolio_share"] == 0.1]
+            if len(_r10):
+                st.caption(
+                    f"The diagonal is what reviewing at random would return. "
+                    f"Reviewing the highest-scoring 10% of the population recovers "
+                    f"{_r10['dissolutions_captured'].iloc[0]:.1%} of the companies "
+                    f"that subsequently dissolved, "
+                    f"{_r10['lift_over_random'].iloc[0]:.1f} times what the same "
+                    f"effort spent at random would find.")
+
+    # ---- 3. how early -----------------------------------------------------
+    with right:
+        st.markdown("##### How early the signal appears")
+        lt = load_lead_time()
+        if lt is None or lt.empty:
+            st.info("rq2_lead_time_windows.csv is not available.")
+        else:
+            fig = go.Figure(go.Bar(
+                x=[f"{int(w)} months" for w in lt["window_months"]],
+                y=lt["flagged_share"],
+                marker_color=UI_YELLOW,
+                text=[f"{s:.1%}<br><span style='color:{UI_TEXT_DIM};font-size:10px'>"
+                      f"n={int(n):,}</span>"
+                      for s, n in zip(lt["flagged_share"], lt["n_companies"])],
+                textposition="outside", cliponaxis=False,
+                hovertemplate="%{x} before dissolution<br>%{y:.1%} flagged"
+                              "<extra></extra>"))
+            fig.add_hline(y=0.05, line_dash="dash", line_color="#FFFFFF",
+                          line_width=1.4, annotation_text="5% if flagging at random",
+                          annotation_position="top right",
+                          annotation_font=dict(color=UI_TEXT_DIM, size=11))
+            plotly_dark(fig, height=360, showlegend=False,
+                        margin=dict(t=46, b=44, l=56, r=26),
+                        xaxis_title="Flagged at least this long before dissolution",
+                        yaxis_title="Share flagged",
+                        yaxis=dict(tickformat=".0%",
+                                   range=[0, max(0.5, lt["flagged_share"].max() * 1.35)]))
+            st.plotly_chart(fig, use_container_width=True)
+            _med = lt["median_lead_months"].iloc[0] if "median_lead_months" in lt else None
+            st.caption(
+                f"Measured on the combined test and prospective cohort, against "
+                f"company records and the register. The median company that "
+                f"dissolved was flagged {_med} months beforehand. Every window is "
+                f"significant against a 5% null by a one-sided binomial test."
+                if _med is not None else
+                "Measured on the combined test and prospective cohort.")
+
+
+# =============================================================================
 # LOAD EVERYTHING
 # =============================================================================
 prosp = load_prospective()
@@ -1753,8 +1939,9 @@ if IS_ENGAGEMENT:
         "Company Lookup",
     ])
 else:
-    tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
+    tab1, tab8, tab2, tab3, tab4, tab5, tab6 = st.tabs([
         "Executive Overview",
+        "Findings",
         "Risk Tiers",
         "Company Lookup",
         "Model Performance",
@@ -2760,22 +2947,22 @@ if not IS_ENGAGEMENT:
 <div style="color:{UI_TEXT_DIM};font-size:0.85rem;margin-top:6px;line-height:1.5;">{expl}</div>
 </div>""", unsafe_allow_html=True)
 
-    _conc = load_concordance_summary()
-    if _conc:
-        st.markdown("---")
-        st.markdown("##### AI narrative faithfulness")
-        st.caption("How closely the AI's per-company summaries track the model's own SHAP "
-                   "drivers, where higher means the narrative emphasises what actually moves the score.")
-        k1, k2, k3 = st.columns(3)
-        if "precision_top5" in _conc:
-            k1.metric("Cited features that are top-5 drivers",
-                      f"{_conc['precision_top5'] * 100:.1f}%")
-        if "cites_any_top3" in _conc:
-            k2.metric("Narratives citing a top-3 driver",
-                      f"{_conc['cites_any_top3'] * 100:.1f}%")
-        if "leads_with_top_driver" in _conc:
-            k3.metric("Lead with the top driver",
-                      f"{_conc['leads_with_top_driver'] * 100:.1f}%")
+        _conc = load_concordance_summary()
+        if _conc:
+            st.markdown("---")
+            st.markdown("##### AI narrative faithfulness")
+            st.caption("How closely the AI's per-company summaries track the model's own SHAP "
+                       "drivers, where higher means the narrative emphasises what actually moves the score.")
+            k1, k2, k3 = st.columns(3)
+            if "precision_top5" in _conc:
+                k1.metric("Cited features that are top-5 drivers",
+                          f"{_conc['precision_top5'] * 100:.1f}%")
+            if "cites_any_top3" in _conc:
+                k2.metric("Narratives citing a top-3 driver",
+                          f"{_conc['cites_any_top3'] * 100:.1f}%")
+            if "leads_with_top_driver" in _conc:
+                k3.metric("Lead with the top driver",
+                          f"{_conc['leads_with_top_driver'] * 100:.1f}%")
 
 
 # ----------------------------------------------------------------------------
@@ -2785,6 +2972,12 @@ if IS_ENGAGEMENT:
     with tab7:
         with safe_block("Client Portfolio"):
             render_portfolio_tab()
+
+
+if not IS_ENGAGEMENT:
+    with tab8:
+        with safe_block("Findings"):
+            render_findings_tab()
 
 
 if not IS_ENGAGEMENT:
