@@ -1991,7 +1991,7 @@ with tab1:
         ))
         plotly_dark(fig, height=320, showlegend=False,
                     margin=dict(t=20, b=44, l=180, r=110),
-                    xaxis_title="Companies (log scale)",
+                    xaxis_title="Companies",
                     # Plotly's default log axis prints every minor tick, so the
                     # labels read 6 7 8 9 100 2 3 4 5 6 7 8 9 1000. Only the
                     # decades mean anything here.
