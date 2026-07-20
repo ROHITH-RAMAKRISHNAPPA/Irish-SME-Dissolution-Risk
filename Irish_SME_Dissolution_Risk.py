@@ -1241,6 +1241,39 @@ def _pick_number_column(df: pd.DataFrame):
     return best if best_share >= 0.6 else None
 
 
+def _pick_name_column(df, number_col):
+    """Find the column of company names: an obvious header, else the non-number
+    column whose values are mostly non-numeric text."""
+    for c in df.columns:
+        if str(c).strip().lower() in ("company_name", "company name", "name",
+                                      "client", "client_name", "client name",
+                                      "companyname"):
+            return c
+    best, best_share = None, 0.0
+    for c in df.columns:
+        if c == number_col:
+            continue
+        s = df[c].dropna().astype(str).str.strip()
+        if s.empty:
+            continue
+        # prefer the column that looks least like numbers and has real length
+        texty = (~s.str.fullmatch(r"[\d.\s]+")).mean()
+        if texty > best_share and s.str.len().median() >= 3:
+            best, best_share = c, texty
+    return best if best_share >= 0.5 else None
+
+
+def name_key(v) -> str:
+    """Normalise a company name for matching: lower case, drop the common legal
+    suffixes and punctuation so 'Pizza Dog Ltd.' meets 'PIZZA DOG LIMITED'."""
+    import re
+    s = str(v).lower().strip()
+    s = re.sub(r"[^a-z0-9 ]", " ", s)
+    s = re.sub(r"\b(limited|ltd|dac|plc|clg|ulc|company|designated|activity|"
+               r"unlimited|the)\b", " ", s)
+    return re.sub(r"\s+", " ", s).strip()
+
+
 def render_portfolio_tab():
     st.markdown("#### Client Portfolio Screen")
     st.caption("Upload an engagement client list to see only those companies, ranked by "
@@ -1253,56 +1286,95 @@ def render_portfolio_tab():
 
     up = st.file_uploader(
         "Client list", type=["csv", "txt", "xlsx", "xls"],
-        help="Any file with a column of CRO numbers. A plain list of numbers, one per "
-             "line, also works. Other columns are ignored.",
+        help="A file with a column of CRO numbers, or of company names, or both. "
+             "A plain list of numbers or names, one per line, also works. Numbers "
+             "match exactly; names match on a normalised form.",
         label_visibility="collapsed")
 
     pasted = ""
-    with st.expander("Or paste CRO numbers"):
+    with st.expander("Or paste CRO numbers or company names"):
         pasted = st.text_area("One per line", height=110, label_visibility="collapsed",
-                              placeholder="628624")
+                              placeholder="628624\nHometherm Insulation Limited")
 
-    wanted, source_label = [], ""
+    # Each client is one row: it may carry a CRO number, a name, or both. The
+    # row is the unit, so a ten-row file is ten clients however many columns it
+    # spans. For each row we try the number first (exact) and fall back to the
+    # name (normalised) only if the number is absent or did not match.
+    clients, source_label = [], ""      # clients: list of (num_key or "", name_key or "")
     if up is not None:
         try:
             raw_df = _read_client_list(up)
         except Exception as e:
             st.error(f"Could not read that file: {type(e).__name__}: {e}")
             return
-        col = _pick_number_column(raw_df)
-        if col is None:
-            st.error("No column of CRO numbers found. Columns seen: "
-                     + ", ".join(str(c) for c in raw_df.columns[:12]))
+        num_col = _pick_number_column(raw_df)
+        name_col = _pick_name_column(raw_df, num_col)
+        if num_col is None and name_col is None:
+            st.error("No column of CRO numbers or company names found. Columns "
+                     "seen: " + ", ".join(str(c) for c in raw_df.columns[:12]))
             return
-        wanted = [company_key(v) for v in raw_df[col].dropna()]
-        source_label = f"{up.name}, column '{col}'"
+        for _, r in raw_df.iterrows():
+            nk = company_key(r[num_col]) if num_col and pd.notna(r[num_col]) else ""
+            mk = name_key(r[name_col]) if name_col and pd.notna(r[name_col]) else ""
+            if nk or mk:
+                clients.append((nk, mk))
+        bits = [b for b in (f"column '{num_col}'" if num_col else "",
+                            f"names in '{name_col}'" if name_col else "") if b]
+        source_label = f"{up.name}, " + " and ".join(bits)
     elif pasted.strip():
-        wanted = [company_key(l) for l in pasted.splitlines() if l.strip()]
+        # a pasted line is a number if it is all digits, otherwise a name
+        for l in (x.strip() for x in pasted.splitlines() if x.strip()):
+            if l.replace(".", "").isdigit():
+                clients.append((company_key(l), ""))
+            else:
+                clients.append(("", name_key(l)))
         source_label = "pasted list"
 
-    if not wanted:
+    if not clients:
         st.info("Upload or paste a client list to begin.")
         return
 
-    wanted_unique = list(dict.fromkeys(wanted))
-    port = prosp[prosp["company_num"].map(company_key).isin(set(wanted_unique))].copy()
+    # De-duplicate rows that are the same client (same number, or same name).
+    seen, uniq = set(), []
+    for nk, mk in clients:
+        key = ("n", nk) if nk else ("m", mk)
+        if key in seen:
+            continue
+        seen.add(key); uniq.append((nk, mk))
+    total_wanted = len(uniq)
+
+    reg_num_key = prosp["company_num"].map(company_key)
+    reg_name_key = (prosp["company_name"].map(name_key)
+                    if "company_name" in prosp.columns else None)
+    num_to_idx = {k: i for i, k in reg_num_key.items()}
+    name_to_idx = ({k: i for i, k in reg_name_key.items()}
+                   if reg_name_key is not None else {})
+
+    # Resolve each client to one register row: number first, then name.
+    idxs = []
+    for nk, mk in uniq:
+        if nk and nk in num_to_idx:
+            idxs.append(num_to_idx[nk])
+        elif mk and mk in name_to_idx:
+            idxs.append(name_to_idx[mk])
+    port = prosp.loc[sorted(set(idxs))].copy()
     matched = len(port)
-    missing = len(wanted_unique) - matched
+    missing = max(0, total_wanted - matched)
 
     m1, m2, m3 = st.columns(3)
-    m1.metric("Clients in list", f"{len(wanted_unique):,}")
+    m1.metric("Clients in list", f"{total_wanted:,}")
     m2.metric("Matched to register", f"{matched:,}")
     m3.metric("Not scored", f"{missing:,}")
 
     if missing:
         st.caption(
-            f"{missing:,} of {len(wanted_unique):,} did not match. The scored cohort is "
+            f"{missing:,} of {total_wanted:,} did not match. The scored cohort is "
             f"the {len(prosp):,} companies with a 2024 observation date, so a client "
             "that has never filed, or last filed before 2024, will not appear. Absence "
             "is not a low-risk finding.")
 
     if port.empty:
-        st.warning(f"None of the {len(wanted_unique):,} companies in {source_label} are "
+        st.warning(f"None of the {total_wanted:,} companies in {source_label} are "
                    "in the scored cohort.")
         return
 
