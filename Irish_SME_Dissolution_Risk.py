@@ -2493,6 +2493,37 @@ if not IS_ENGAGEMENT:
                                     yaxis=dict(tickformat=".0%"))
                     st.plotly_chart(box, use_container_width=True)
 
+            # Score-threshold explorer: the decision tool. Drag a cut-off and see how
+            # many companies sit above it and what share of the elevated tiers that
+            # captures. This is the triage-gains argument made interactive: a reviewer
+            # asks "if I review everyone above X, how much of the risk do I cover?"
+            if "dissolution_risk_score" in prosp.columns:
+                st.markdown("---")
+                st.markdown("##### Review-Threshold Explorer")
+                st.caption("Set a dissolution-risk cut-off. The dashboard shows how many "
+                           "companies fall above it and what share of the elevated-tier "
+                           "companies (PRIORITY and DISSOLUTION_RISK) that review would cover.")
+                thr = st.slider("Review everyone at or above this dissolution risk (%)",
+                                0, 100, 50, 5, key="thr_explorer") / 100.0
+                scores = pd.to_numeric(prosp["dissolution_risk_score"], errors="coerce")
+                elevated = prosp["combined_risk_tier"].isin(["PRIORITY", "DISSOLUTION_RISK"])
+                above = scores >= thr
+                n_above = int(above.sum())
+                elev_total = int(elevated.sum())
+                elev_caught = int((above & elevated).sum())
+                share_reviewed = n_above / len(prosp) if len(prosp) else 0
+                share_caught = elev_caught / elev_total if elev_total else 0
+                e1, e2, e3 = st.columns(3)
+                e1.metric("Companies to review", f"{n_above:,}",
+                          f"{share_reviewed*100:.1f}% of the register")
+                e2.metric("Elevated-tier companies covered", f"{elev_caught:,}",
+                          f"{share_caught*100:.1f}% of all elevated")
+                e3.metric("Cut-off", f"{thr*100:.0f}%")
+                st.caption(f"Reviewing the {share_reviewed*100:.1f}% of companies at or above "
+                           f"a {thr*100:.0f}% risk score covers {share_caught*100:.1f}% of the "
+                           "companies the model places in an elevated tier. Lowering the cut-off "
+                           "widens the review and raises coverage; raising it does the reverse.")
+
 
 # ----------------------------------------------------------------------------
 # TAB 3 - COMPANY LOOKUP (with live LLM narrative)
@@ -2906,6 +2937,35 @@ if not IS_ENGAGEMENT:
                            "catching rare dissolutions. Logistic Regression scores higher on "
                            "AUC but far lower on precision, which is why it is not selected.")
 
+            # Metric selector: the report can only print one metric's chart; here the
+            # reader chooses any of the five and sees every model ranked on it. This
+            # folds the separate AP, ROC and KS figures into one control.
+            metric_opts = {
+                "Average precision": "avg_precision",
+                "AUC-ROC": "auc_roc",
+                "F1 score": "f1",
+                "KS statistic": "ks_stat",
+                "Brier score (lower is better)": "brier_score",
+            }
+            avail = {k: v for k, v in metric_opts.items() if v in comp_df.columns}
+            if avail:
+                st.markdown("---")
+                st.markdown("##### Compare Models on Any Metric")
+                sel_metric = st.selectbox("Metric", list(avail.keys()), key="mp_metric")
+                col = avail[sel_metric]
+                asc = (col == "brier_score")  # lower is better for Brier
+                md = comp_df[["model", col]].dropna().sort_values(col, ascending=asc)
+                mbar = px.bar(md, x=col, y="model", orientation="h",
+                              color_discrete_sequence=[UI_YELLOW],
+                              text=md[col].map("{:.4f}".format))
+                plotly_dark(mbar, height=360, margin=dict(t=20, b=40, l=140, r=60),
+                            xaxis_title=sel_metric)
+                mbar.update_traces(textposition="outside")
+                mbar.update_yaxes(autorange="reversed")
+                st.plotly_chart(mbar, use_container_width=True)
+                if asc:
+                    st.caption("Brier score measures calibration error, so a lower bar is better here.")
+
             st.markdown("---")
             st.markdown("##### Research Question Validation")
 
@@ -2978,7 +3038,7 @@ if not IS_ENGAGEMENT:
         if mean_abs_shap is None or not feature_cols:
             st.warning("Risk-factor data not available. Run the explainability step first.")
         else:
-            n_show = st.slider("Features to display", 10, len(feature_cols), 25)
+            n_show = st.slider("Features to display", 10, len(feature_cols), 15)
             ranked = pd.DataFrame({
                 "Feature": [feature_label(f) for f in feature_cols],
                 "MeanAbsSHAP": mean_abs_shap,
@@ -2990,6 +3050,100 @@ if not IS_ENGAGEMENT:
                         margin=dict(t=20, b=40, l=250, r=20),
                         xaxis_title="Overall influence on dissolution risk")
             st.plotly_chart(fig, use_container_width=True)
+
+            # Live correlation structure for the same top-N features the slider
+            # selected. This shows not just which features matter but how they
+            # move together, the visual behind the parsimony result: when the
+            # strongest predictors are correlated, a compact set carries most of
+            # the information the full specification does.
+            ranked_raw = pd.DataFrame({
+                "feature": feature_cols,
+                "MeanAbsSHAP": mean_abs_shap,
+            }).sort_values("MeanAbsSHAP", ascending=False).head(n_show)
+            top_feats = [f for f in ranked_raw["feature"] if f in prosp.columns]
+            num_feats = [f for f in top_feats
+                         if pd.api.types.is_numeric_dtype(prosp[f])]
+            if len(num_feats) >= 3:
+                st.markdown("---")
+                st.markdown(f"##### How the Top {len(num_feats)} Factors Move Together")
+                st.caption("Correlation among the highest-ranked features. Deep blocks of "
+                           "colour mean several factors carry overlapping information, which "
+                           "is why a compact feature set retains most of the model's signal.")
+                corr = prosp[num_feats].corr().round(2)
+                labels = [feature_label(f) for f in num_feats]
+                # EY-theme gradient: dark at low/negative correlation, brightening
+                # through amber to full EY yellow at strong positive correlation.
+                ey_scale = [
+                    [0.00, "#1A1A23"],
+                    [0.30, "#2E2A18"],
+                    [0.50, "#5A4B10"],
+                    [0.70, "#9A7D00"],
+                    [0.85, "#D4B400"],
+                    [1.00, "#FFE600"],
+                ]
+                nfe = len(num_feats)
+                # show the numeric correlation in each cell when the grid is small
+                # enough for the text to be legible (up to 15x15).
+                show_text = nfe <= 15
+                hm = px.imshow(
+                    corr.values, x=labels, y=labels,
+                    color_continuous_scale=ey_scale, zmin=-1, zmax=1,
+                    aspect="equal",
+                    text_auto=".2f" if show_text else False,
+                )
+                # square cells sized so a two-decimal number fits; scales the whole
+                # figure with the feature count instead of squashing rows.
+                cell = 44 if show_text else 30
+                side = cell * nfe
+                plotly_dark(hm, height=side + 200,
+                            margin=dict(t=20, b=200, l=260, r=40))
+                hm.update_xaxes(tickangle=45, tickmode="array",
+                                tickvals=list(range(nfe)), ticktext=labels,
+                                showticklabels=True, automargin=True)
+                hm.update_yaxes(tickmode="array",
+                                tickvals=list(range(nfe)), ticktext=labels,
+                                showticklabels=True, automargin=True)
+                if show_text:
+                    hm.update_traces(textfont=dict(size=11, color="#1A1A23"))
+                hm.update_layout(coloraxis_colorbar=dict(title="corr"))
+                st.plotly_chart(hm, use_container_width=True)
+
+            # Feature-distribution explorer: pick any feature and see how its values
+            # differ between companies in an elevated tier and the rest. This is the
+            # static distribution figure made selectable, so a reader can interrogate
+            # any single driver rather than the fixed handful the report can print.
+            numeric_feats = [f for f in feature_cols
+                             if f in prosp.columns
+                             and pd.api.types.is_numeric_dtype(prosp[f])]
+            if numeric_feats and "combined_risk_tier" in prosp.columns:
+                st.markdown("---")
+                st.markdown("##### Distribution of a Single Factor by Risk Group")
+                st.caption("Choose a factor to see how its distribution differs between "
+                           "companies in an elevated tier (PRIORITY or DISSOLUTION_RISK) "
+                           "and the rest of the register.")
+                default_ix = (numeric_feats.index("ar_filed_count")
+                              if "ar_filed_count" in numeric_feats else 0)
+                fsel = st.selectbox("Factor", [feature_label(f) for f in numeric_feats],
+                                    index=default_ix, key="dist_feature")
+                fkey = numeric_feats[[feature_label(f) for f in numeric_feats].index(fsel)]
+                dist = pd.DataFrame({
+                    "value": pd.to_numeric(prosp[fkey], errors="coerce"),
+                    "group": np.where(
+                        prosp["combined_risk_tier"].isin(["PRIORITY", "DISSOLUTION_RISK"]),
+                        "Elevated tier", "Everyone else"),
+                }).dropna(subset=["value"])
+                # clip the top 1% so a long tail does not flatten the histogram
+                if len(dist) > 50:
+                    _cap = dist["value"].quantile(0.99)
+                    dist = dist[dist["value"] <= _cap]
+                hist = px.histogram(dist, x="value", color="group", barmode="overlay",
+                                    histnorm="percent", nbins=40,
+                                    color_discrete_map={"Elevated tier": UI_YELLOW,
+                                                        "Everyone else": "#4EA8DE"})
+                plotly_dark(hist, height=380, margin=dict(t=20, b=40, l=60, r=20),
+                            xaxis_title=fsel, yaxis_title="Share within group (%)")
+                hist.update_traces(opacity=0.9)
+                st.plotly_chart(hist, use_container_width=True)
 
             st.markdown("---")
             st.markdown("##### Top 5 Risk Drivers")
@@ -3018,6 +3172,43 @@ if not IS_ENGAGEMENT:
 </div>
 <div style="color:{UI_TEXT_DIM};font-size:0.85rem;margin-top:6px;line-height:1.5;">{expl}</div>
 </div>""", unsafe_allow_html=True)
+
+        # Interactive dissolution-rate-by-age curve. The static Figure 4.2 shows
+        # this for the whole training partition; here the reader can restrict it
+        # to a sector and watch the risk shape change, which the fixed figure
+        # cannot do. Uses the prospective cohort's tier as the outcome proxy.
+        if ("company_age_years" in prosp.columns
+                and "combined_risk_tier" in prosp.columns):
+            st.markdown("---")
+            st.markdown("##### Dissolution Risk by Company Age")
+            st.caption("Share of companies in an elevated tier (PRIORITY or "
+                       "DISSOLUTION_RISK) across age bands. Restrict to a sector to see "
+                       "how the risk shape differs from the register as a whole.")
+            work = prosp.copy()
+            if "sector_label" not in work.columns:
+                work = add_sector_label(work)
+            sectors = ["All sectors"] + sorted(
+                s for s in work.get("sector_label", pd.Series(dtype=str)).dropna().unique()
+                if str(s).strip() and str(s) != "Unknown")
+            sec = st.selectbox("Sector", sectors, key="age_curve_sector")
+            if sec != "All sectors" and "sector_label" in work.columns:
+                work = work[work["sector_label"] == sec]
+            ages = pd.to_numeric(work["company_age_years"], errors="coerce")
+            elevated = work["combined_risk_tier"].isin(["PRIORITY", "DISSOLUTION_RISK"])
+            band = pd.cut(ages, bins=[0, 2, 5, 10, 15, 20, 100],
+                          labels=["0-2", "2-5", "5-10", "10-15", "15-20", "20+"])
+            grp = pd.DataFrame({"band": band, "elevated": elevated.values}).dropna(subset=["band"])
+            if len(grp) >= 20:
+                rate = grp.groupby("band", observed=True)["elevated"].mean().reset_index()
+                rate["pct"] = (rate["elevated"] * 100).round(1)
+                line = px.line(rate, x="band", y="pct", markers=True,
+                               color_discrete_sequence=[UI_YELLOW])
+                plotly_dark(line, height=380, margin=dict(t=20, b=40, l=60, r=20),
+                            xaxis_title="Company age (years)",
+                            yaxis_title="Elevated-tier share (%)")
+                st.plotly_chart(line, use_container_width=True)
+            else:
+                st.caption("Not enough companies in this sector to plot a stable curve.")
 
         _conc = load_concordance_summary()
         if _conc:
